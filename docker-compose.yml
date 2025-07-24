@@ -1,6 +1,8 @@
+version: '3.8'
+
 services:
   web:
-    image: php:apache
+    build: .
     container_name: playlogue_web
     ports:
       - "8080:80"
@@ -35,4 +37,3 @@ services:
 
 volumes:
   pgdata:
-
