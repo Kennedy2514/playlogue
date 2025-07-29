@@ -18,16 +18,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: admin
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
 
 -- *not* creating schema, since initdb creates it
 
 
-ALTER SCHEMA public OWNER TO admin;
-
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: admin
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON SCHEMA public IS '';
@@ -38,7 +36,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: game_genre; Type: TABLE; Schema: public; Owner: admin
+-- Name: game_genre; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.game_genre (
@@ -47,10 +45,8 @@ CREATE TABLE public.game_genre (
 );
 
 
-ALTER TABLE public.game_genre OWNER TO admin;
-
 --
--- Name: game_platform; Type: TABLE; Schema: public; Owner: admin
+-- Name: game_platform; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.game_platform (
@@ -59,10 +55,8 @@ CREATE TABLE public.game_platform (
 );
 
 
-ALTER TABLE public.game_platform OWNER TO admin;
-
 --
--- Name: games; Type: TABLE; Schema: public; Owner: admin
+-- Name: games; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.games (
@@ -73,10 +67,8 @@ CREATE TABLE public.games (
 );
 
 
-ALTER TABLE public.games OWNER TO admin;
-
 --
--- Name: games_gameid_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: games_gameid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.games_gameid_seq
@@ -88,17 +80,15 @@ CREATE SEQUENCE public.games_gameid_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.games_gameid_seq OWNER TO admin;
-
 --
--- Name: games_gameid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: games_gameid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.games_gameid_seq OWNED BY public.games.gameid;
 
 
 --
--- Name: genres; Type: TABLE; Schema: public; Owner: admin
+-- Name: genres; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.genres (
@@ -107,10 +97,8 @@ CREATE TABLE public.genres (
 );
 
 
-ALTER TABLE public.genres OWNER TO admin;
-
 --
--- Name: genres_genreid_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: genres_genreid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.genres_genreid_seq
@@ -122,17 +110,15 @@ CREATE SEQUENCE public.genres_genreid_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.genres_genreid_seq OWNER TO admin;
-
 --
--- Name: genres_genreid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: genres_genreid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.genres_genreid_seq OWNED BY public.genres.genreid;
 
 
 --
--- Name: platform; Type: TABLE; Schema: public; Owner: admin
+-- Name: platform; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.platform (
@@ -141,10 +127,8 @@ CREATE TABLE public.platform (
 );
 
 
-ALTER TABLE public.platform OWNER TO admin;
-
 --
--- Name: platform_platformid_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: platform_platformid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.platform_platformid_seq
@@ -156,17 +140,15 @@ CREATE SEQUENCE public.platform_platformid_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.platform_platformid_seq OWNER TO admin;
-
 --
--- Name: platform_platformid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: platform_platformid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.platform_platformid_seq OWNED BY public.platform.platformid;
 
 
 --
--- Name: reviews; Type: TABLE; Schema: public; Owner: admin
+-- Name: reviews; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.reviews (
@@ -180,10 +162,8 @@ CREATE TABLE public.reviews (
 );
 
 
-ALTER TABLE public.reviews OWNER TO admin;
-
 --
--- Name: reviews_reviewid_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: reviews_reviewid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.reviews_reviewid_seq
@@ -195,17 +175,15 @@ CREATE SEQUENCE public.reviews_reviewid_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.reviews_reviewid_seq OWNER TO admin;
-
 --
--- Name: reviews_reviewid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: reviews_reviewid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.reviews_reviewid_seq OWNED BY public.reviews.reviewid;
 
 
 --
--- Name: user_favorites; Type: TABLE; Schema: public; Owner: admin
+-- Name: user_favorites; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.user_favorites (
@@ -214,10 +192,8 @@ CREATE TABLE public.user_favorites (
 );
 
 
-ALTER TABLE public.user_favorites OWNER TO admin;
-
 --
--- Name: users; Type: TABLE; Schema: public; Owner: admin
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.users (
@@ -228,10 +204,8 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO admin;
-
 --
--- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: admin
+-- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.users_userid_seq
@@ -243,52 +217,50 @@ CREATE SEQUENCE public.users_userid_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_userid_seq OWNER TO admin;
-
 --
--- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+-- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.users_userid_seq OWNED BY public.users.userid;
 
 
 --
--- Name: games gameid; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: games gameid; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.games ALTER COLUMN gameid SET DEFAULT nextval('public.games_gameid_seq'::regclass);
 
 
 --
--- Name: genres genreid; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: genres genreid; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.genres ALTER COLUMN genreid SET DEFAULT nextval('public.genres_genreid_seq'::regclass);
 
 
 --
--- Name: platform platformid; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: platform platformid; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.platform ALTER COLUMN platformid SET DEFAULT nextval('public.platform_platformid_seq'::regclass);
 
 
 --
--- Name: reviews reviewid; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: reviews reviewid; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.reviews ALTER COLUMN reviewid SET DEFAULT nextval('public.reviews_reviewid_seq'::regclass);
 
 
 --
--- Name: users userid; Type: DEFAULT; Schema: public; Owner: admin
+-- Name: users userid; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.users_userid_seq'::regclass);
 
 
 --
--- Data for Name: game_genre; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: game_genre; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.game_genre (gameid, genreid) FROM stdin;
@@ -1346,68 +1318,134 @@ COPY public.game_genre (gameid, genreid) FROM stdin;
 549	1
 550	3
 550	4
-530	3
-530	1
-39	1
-523	2
-523	11
-523	3
-523	1
-479	6
-479	12
-479	1
-50	1
-57	2
-57	1
-57	8
-60	2
-60	3
-60	1
-61	5
-212	6
-212	1
-214	3
-214	1
-214	4
-214	8
-214	2
-214	12
-215	1
-215	4
-221	1
-228	1
-228	4
-728	1
-729	2
-748	1
-272	6
-272	1
 281	6
 281	3
 281	1
-289	1
-312	5
-312	8
-321	1
-338	3
-338	1
-338	4
-415	3
-415	1
-415	4
-419	5
-419	3
-419	4
-453	11
-453	3
-453	1
-471	6
-471	1
+350	1
+350	6
+351	4
+351	5
+351	17
+351	18
+352	1
+352	3
+352	7
+352	11
+354	1
+354	3
+355	1
+355	8
+355	2
+356	4
+357	3
+357	2
+357	9
+358	1
+358	6
+358	3
+358	5
+359	1
+359	3
+360	1
+360	6
+360	3
+361	4
+361	5
+361	2
+362	3
+362	2
+362	9
+362	11
+363	2
+363	11
+364	1
+364	3
+365	1
+365	3
+365	4
+366	1
+366	6
+367	1
+367	6
+367	3
+367	12
+368	1
+368	4
+368	2
+368	11
+369	1
+369	4
+369	7
+370	3
+370	4
+370	2
+370	9
+371	1
+371	6
+372	3
+372	2
+372	9
+374	1
+374	4
+374	2
+374	11
+375	13
+375	10
+376	1
+376	6
+377	1
+378	1
+378	6
+378	3
+379	1
+379	3
+379	4
+380	6
+381	3
+382	1
+382	3
+383	3
+383	9
+384	3
+384	16
+384	2
+384	9
+385	1
+385	6
+386	4
+387	6
+387	4
+388	1
+388	6
+389	1
+389	3
+389	2
+389	9
+389	11
+390	5
+390	2
+391	6
+391	4
+392	1
+392	6
+393	3
+394	1
+394	6
+395	1
+395	4
+396	15
+397	1
+398	5
+398	19
+398	16
+398	2
+398	9
+399	6
 \.
 
 
 --
--- Data for Name: game_platform; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: game_platform; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.game_platform (gameid, platformid) FROM stdin;
@@ -3444,117 +3482,250 @@ COPY public.game_platform (gameid, platformid) FROM stdin;
 550	4
 550	6
 550	12
-530	1
-530	3
-530	8
-530	12
-530	14
-530	16
-39	1
-39	14
-39	16
-523	1
-523	3
-523	4
-523	6
-523	7
-523	8
-523	12
-523	13
-523	16
-523	19
-523	21
-479	1
-479	3
-479	4
-50	1
-50	2
-50	4
-57	1
-57	3
-57	4
-57	12
-57	13
-60	1
-60	3
-60	4
-60	6
-61	1
-61	12
-61	13
-212	1
-212	2
-212	3
-212	4
-212	5
-214	1
-214	2
-214	3
-214	4
-214	6
-215	1
-215	3
-215	4
-215	6
-221	1
-221	3
-221	4
-221	12
-221	14
-221	16
-228	1
-228	3
-228	4
-728	1
-728	3
-728	4
-729	1
-729	4
-729	3
-729	12
-729	13
-729	16
-729	19
-729	21
-748	4
-748	16
-272	1
-272	3
-272	14
 281	4
-289	1
-289	3
-289	4
-312	1
-321	1
-321	3
-321	14
-321	16
-338	1
-338	3
-338	4
-338	6
-338	14
-338	16
-415	1
-415	2
-415	3
-415	4
-415	5
-419	1
-419	2
-419	5
-419	12
-453	1
-453	3
-453	4
-471	4
-471	16
+350	16
+350	4
+350	14
+350	3
+351	3
+351	7
+351	1
+351	4
+351	8
+352	4
+352	3
+352	1
+352	6
+354	1
+354	16
+354	14
+354	8
+354	7
+355	12
+355	3
+355	6
+355	1
+355	4
+356	14
+356	15
+356	1
+357	3
+357	4
+357	7
+357	1
+357	12
+357	13
+357	6
+357	8
+358	3
+358	1
+358	4
+359	5
+359	1
+359	7
+359	2
+359	6
+359	3
+359	4
+360	1
+360	3
+360	4
+360	16
+360	14
+361	4
+361	12
+361	1
+361	3
+362	8
+362	12
+362	1
+362	7
+362	3
+362	2
+362	5
+362	4
+362	6
+363	16
+363	14
+363	1
+363	4
+363	19
+364	14
+364	22
+364	12
+364	1
+364	10
+364	16
+365	4
+365	1
+365	3
+365	6
+366	16
+366	3
+366	1
+366	14
+367	1
+367	3
+367	4
+368	4
+368	14
+368	1
+368	7
+368	16
+368	19
+368	6
+369	1
+369	12
+369	13
+369	14
+370	6
+370	7
+370	1
+370	12
+370	4
+370	3
+370	13
+371	15
+371	20
+371	17
+371	1
+372	4
+372	6
+372	3
+372	1
+374	14
+374	7
+374	1
+374	12
+374	13
+374	6
+374	4
+375	14
+375	1
+375	16
+376	1
+376	15
+376	17
+377	13
+377	12
+377	1
+378	2
+378	5
+378	1
+378	4
+378	6
+378	3
+379	16
+379	4
+380	1
+380	16
+380	14
+381	4
+381	13
+381	12
+381	1
+381	6
+381	3
+382	1
+382	4
+382	6
+382	3
+383	16
+383	14
+383	6
+383	1
+383	7
+383	8
+383	3
+383	4
+384	16
+384	4
+384	19
+384	3
+384	7
+384	1
+384	8
+384	13
+384	6
+384	12
+385	14
+385	1
+385	16
+386	4
+386	3
+386	12
+386	1
+386	13
+387	5
+387	4
+387	1
+387	3
+387	6
+388	16
+388	14
+388	1
+389	21
+389	3
+389	12
+389	19
+389	1
+389	13
+389	16
+389	4
+390	3
+390	4
+390	12
+390	1
+390	13
+391	1
+391	4
+391	3
+391	6
+391	5
+392	1
+392	17
+392	16
+392	14
+392	15
+392	23
+393	4
+393	3
+393	1
+394	16
+394	1
+394	14
+394	3
+395	16
+395	3
+395	1
+395	21
+395	14
+396	8
+396	4
+396	1
+396	3
+396	7
+397	12
+397	1
+397	13
+398	8
+398	7
+398	1
+398	12
+398	13
+398	6
+398	22
+399	14
+399	1
+399	16
+399	10
+399	3
+399	22
 \.
 
 
 --
--- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.games (gameid, title, release_date, cover) FROM stdin;
@@ -3596,7 +3767,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 36	Little Nightmares	2017-04-27	https://media.rawg.io/media/games/8a0/8a02f84a5916ede2f923b88d5f8217ba.jpg
 37	Dark Souls III	2016-04-11	https://media.rawg.io/media/games/da1/da1b267764d77221f07a4386b6548e5a.jpg
 38	Stardew Valley	2016-02-25	https://media.rawg.io/media/games/713/713269608dc8f2f40f5a670a14b2de94.jpg
-39	Mirror's Edge	2008-11-11	https://media.rawg.io/media/games/8e4/8e4de3f54ac659e08a7ba6a2b731682a.jpg
 40	Hitman	2016-03-11	https://media.rawg.io/media/games/16b/16b1b7b36e2042d1128d5a3e852b3b2f.jpg
 41	Hotline Miami	2012-10-22	https://media.rawg.io/media/games/9fa/9fa63622543e5d4f6d99aa9d73b043de.jpg
 42	Outlast	2013-09-03	https://media.rawg.io/media/games/9dd/9ddabb34840ea9227556670606cf8ea3.jpg
@@ -3607,18 +3777,14 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 47	Amnesia: The Dark Descent	2010-09-08	https://media.rawg.io/media/games/b54/b54598d1d5cc31899f4f0a7e3122a7b0.jpg
 48	Wolfenstein: The New Order	2014-05-19	https://media.rawg.io/media/games/c80/c80bcf321da44d69b18a06c04d942662.jpg
 49	Spec Ops: The Line	2012-06-26	https://media.rawg.io/media/games/b49/b4912b5dbfc7ed8927b65f05b8507f6c.jpg
-50	Marvel's Spider-Man	2018-09-07	https://media.rawg.io/media/games/9aa/9aa42d16d425fa6f179fc9dc2f763647.jpg
 51	Saints Row: The Third	2011-11-15	https://media.rawg.io/media/games/d69/d69810315bd7e226ea2d21f9156af629.jpg
 52	Detroit: Become Human	2018-05-25	https://media.rawg.io/media/games/951/951572a3dd1e42544bd39a5d5b42d234.jpg
 53	Prey	2017-05-05	https://media.rawg.io/media/games/e6d/e6de699bd788497f4b52e2f41f9698f2.jpg
 54	Fallout: New Vegas	2010-10-19	https://media.rawg.io/media/games/995/9951d9d55323d08967640f7b9ab3e342.jpg
 55	Borderlands	2009-10-20	https://media.rawg.io/media/games/c6b/c6bfece1daf8d06bc0a60632ac78e5bf.jpg
 56	Dishonored 2	2016-11-10	https://media.rawg.io/media/games/f6b/f6bed028b02369d4cab548f4f9337e81.jpg
-57	Don't Starve Together	2016-04-21	https://media.rawg.io/media/games/dd5/dd50d4266915d56dd5b63ae1bf72606a.jpg
 58	Company of Heroes 2	2013-06-25	https://media.rawg.io/media/games/0bd/0bd5646a3d8ee0ac3314bced91ea306d.jpg
 59	Dishonored	2012-09-25	https://media.rawg.io/media/games/4e6/4e6e8e7f50c237d76f38f3c885dae3d2.jpg
-60	Hellblade: Senua's Sacrifice	2017-08-07	https://media.rawg.io/media/games/63f/63f0e68688cad279ed38cde931dbfcdb.jpg
-61	Sid Meier's Civilization V	2010-09-21	https://media.rawg.io/media/games/55e/55ee6432ac2bf224610fa17e4c652107.jpg
 62	Grand Theft Auto: Vice City	2002-10-27	https://media.rawg.io/media/games/13a/13a528ac9cf48bbb6be5d35fe029336d.jpg
 63	Hitman: Absolution	2012-11-19	https://media.rawg.io/media/games/d46/d46373f39458670305704ef089387520.jpg
 64	Super Meat Boy	2010-10-20	https://media.rawg.io/media/games/e04/e04963f3ac4c4fa83a1dc0b9231e50db.jpg
@@ -3669,23 +3835,18 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 209	Sekiro: Shadows Die Twice	2019-03-22	https://media.rawg.io/media/games/67f/67f62d1f062a6164f57575e0604ee9f6.jpg
 210	Max Payne 3	2012-05-15	https://media.rawg.io/media/games/5bf/5bf88a28de96321c86561a65ee48e6c2.jpg
 211	Saints Row IV	2013-08-20	https://media.rawg.io/media/games/e3d/e3ddc524c6292a435d01d97cc5f42ea7.jpg
-212	Tom Clancy's Rainbow Six Siege	2015-12-01	https://media.rawg.io/media/games/b34/b3419c2706f8f8dbe40d08e23642ad06.jpg
 213	Firewatch	2016-02-08	https://media.rawg.io/media/games/0be/0bea0a08a4d954337305391b778a7f37.jpg
-214	No Man's Sky	2016-08-09	https://media.rawg.io/media/games/174/1743b3dd185bda4a7be349347d4064df.jpg
-215	Assassin's Creed Odyssey	2018-10-05	https://media.rawg.io/media/games/c6b/c6bd26767c1053fef2b10bb852943559.jpg
 216	Alien: Isolation	2014-10-05	https://media.rawg.io/media/games/daa/daaee07fcb40744d90cf8142f94a241f.jpg
 217	The Darkness II	2012-02-07	https://media.rawg.io/media/games/744/744adc36e6573dd67a0cb0e373738d19.jpg
 218	Hitman 2	2018-11-13	https://media.rawg.io/media/games/858/858c016de0cf7bc21a57dcc698a04a0c.jpg
 219	War Thunder	2013-08-15	https://media.rawg.io/media/games/d07/d0790809a13027251b6d0f4dc7538c58.jpg
 220	Darksiders	2010-01-27	https://media.rawg.io/media/games/8d4/8d46786ca86b1d95f3dc7e700e2dc4dd.jpg
-221	Assassin's Creed II	2009-11-17	https://media.rawg.io/media/games/1be/1bed7fae69d1004c09dfe1101d5a3a94.jpg
 222	Cuphead	2017-09-29	https://media.rawg.io/media/games/226/2262cea0b385db6cf399f4be831603b0.jpg
 223	Batman: Arkham Origins	2013-10-25	https://media.rawg.io/media/games/fc3/fc30790a3b3c738d7a271b02c1e26dc2.jpg
 224	Disco Elysium	2019-10-14	https://media.rawg.io/media/games/840/8408ad3811289a6a5830cae60fb0b62a.jpg
 225	Elden Ring	2022-02-25	https://media.rawg.io/media/games/b29/b294fdd866dcdb643e7bab370a552855.jpg
 226	DOOM Eternal	2020-03-20	https://media.rawg.io/media/games/3ea/3ea3c9bbd940b6cb7f2139e42d3d443f.jpg
 227	Among Us	2018-07-25	https://media.rawg.io/media/games/e74/e74458058b35e01c1ae3feeb39a3f724.jpg
-228	Assassin's Creed Origins	2017-10-27	https://media.rawg.io/media/games/336/336c6bd63d83cf8e59937ab8895d1240.jpg
 229	Crusader Kings II	2012-02-13	https://media.rawg.io/media/games/c22/c22d804ac753c72f2617b3708a625dec.jpg
 230	Halo Infinite	2021-12-08	https://media.rawg.io/media/games/e1f/e1ffbeb1bac25b19749ad285ca29e158.jpg
 231	Transistor	2014-05-20	https://media.rawg.io/media/games/d1f/d1f872a48286b6b751670817d5c1e1be.jpg
@@ -3729,7 +3890,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 269	Deus Ex: Human Revolution	2011-08-22	https://media.rawg.io/media/games/81e/81e6c6819d4322caf375b6735c3043ec.jpg
 270	Sleeping Dogs	2012-08-14	https://media.rawg.io/media/games/3d9/3d9bac98d79bcd2d445f829e8d6be902.jpg
 271	To the Moon	2011-01-10	https://media.rawg.io/media/games/fae/faebf3c8cbf30db3f46bfbecf6ada3d6.jpg
-272	Alan Wake's American Nightmare	2012-02-22	https://media.rawg.io/media/games/0b3/0b34647c42271600399b93d19b10f1aa.jpg
 273	Bayonetta	2009-06-23	https://media.rawg.io/media/games/bee/bee483efadcf9d7e657e52184316a34e.jpg
 274	Tom Clancy’s The Division	2016-03-07	https://media.rawg.io/media/games/c73/c73c4ffebfe968ba0982a56c2b5020ef.jpg
 275	Frostpunk	2018-04-24	https://media.rawg.io/media/games/a88/a886c37bf112d009e318b106db9d420a.jpg
@@ -3746,7 +3906,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 286	LEGO The Lord of the Rings	2012-10-30	https://media.rawg.io/media/games/89a/89a700d3c6a76bd0610ca89ccd20da54.jpg
 287	Batman: Arkham Asylum	2009-08-25	https://media.rawg.io/media/games/d56/d564ee964eb3c17892b3b35dd607f836.jpg
 288	Mafia: The City of Lost Heaven	2002-08-28	https://media.rawg.io/media/games/74c/74ca0ec569682a150f3c6f9f661fb6a5.jpg
-289	Assassin's Creed Syndicate	2015-10-23	https://media.rawg.io/media/games/9f1/9f189c639f70f91166df415811a8b525.jpg
 290	Overcooked	2016-08-01	https://media.rawg.io/media/games/270/270b412b66688081497b3d70c100b208.jpg
 291	Ghost of Tsushima	2020-07-17	https://media.rawg.io/media/games/f24/f2493ea338fe7bd3c7d73750a85a0959.jpeg
 292	STAR WARS Battlefront II	2017-11-17	https://media.rawg.io/media/games/f54/f54e9fb2f4aac37810ea1a69a3e4480a.jpg
@@ -3769,7 +3928,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 309	Star Wars: Knights of the Old Republic II – The Sith Lords	2004-12-06	https://media.rawg.io/media/games/046/0464f4a36cd975a37c95b93b06058855.jpg
 310	Prison Architect	2015-10-05	https://media.rawg.io/media/games/6bc/6bc79f5bc023b1e6938f6eaf9926f073.jpg
 311	Beholder	2016-11-08	https://media.rawg.io/media/games/40a/40ab95c1639aa1d7ec04d4cd523af6b1.jpg
-312	Sid Meier's Civilization III Complete	2001-10-29	https://media.rawg.io/media/games/054/0549f1a0a5e782d4e81cdf8d022073fa.jpg
 313	Stray	2022-07-19	https://media.rawg.io/media/games/cd3/cd3c9c7d3e95cb1608fd6250f1b90b7a.jpg
 314	Jotun: Valhalla Edition	2015-09-29	https://media.rawg.io/media/games/032/0329db96e252aa41e672da2ba16f914c.jpg
 315	Starbound	2016-07-22	https://media.rawg.io/media/games/6d9/6d92d50affeebf2eb3894d178eb1117e.jpg
@@ -3778,7 +3936,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 318	Braid	2008-08-06	https://media.rawg.io/media/games/a5a/a5abaa1b5cc1567b026fa3aa9fbd828e.jpg
 319	Killing Floor 2	2016-11-18	https://media.rawg.io/media/games/192/1921ec949024a5fbd1e1c7008f54b5af.jpg
 320	Red Orchestra 2: Heroes of Stalingrad with Rising Storm	2011-09-13	https://media.rawg.io/media/games/bff/bff077fb7c3b037bd5ed920bf447c863.jpg
-321	Assassin's Creed	2007-11-13	https://media.rawg.io/media/games/0bc/0bcc108295a244b488d5c25f7d867220.jpg
 322	GRID (2008)	2008-06-03	https://media.rawg.io/media/games/fc0/fc076b974197660a582abd34ebccc27f.jpg
 323	Neverwinter	2013-06-20	https://media.rawg.io/media/games/26b/26b27e1da9e3727fcb12e3e4e86c8c19.jpg
 324	F.E.A.R.	2005-10-18	https://media.rawg.io/media/games/89a/89a8378d49732505cdb28babe505df9e.jpg
@@ -3795,7 +3952,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 335	Drawful 2	2016-06-20	https://media.rawg.io/media/games/eeb/eeb9e668da5fd07bab9f655acfbbe579.jpg
 336	Orwell: Keeping an Eye On You	2016-10-27	https://media.rawg.io/media/games/2e1/2e187b31e5cee21c110bd16798d75fab.jpg
 337	Slay the Spire	2019-01-22	https://media.rawg.io/media/games/f52/f5206d55f918edf8ee07803101106fa6.jpg
-338	Dragon's Dogma: Dark Arisen	2013-04-23	https://media.rawg.io/media/games/639/639ce7d7fecbb9f0717e9fbc1180f8f8.jpg
 339	Deep Rock Galactic	2020-05-13	https://media.rawg.io/media/games/c92/c9207a31f0eeb9904a840fc26eae6afb.jpg
 340	Stellaris	2016-05-08	https://media.rawg.io/media/games/92b/92bbf8a451e2742ab812a580546e593a.jpg
 341	Oxenfree	2016-01-14	https://media.rawg.io/media/games/7ba/7baf4663962bad7197e2470d59a6e322.jpg
@@ -3810,7 +3966,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 350	Destiny	2014-09-09	https://media.rawg.io/media/games/062/062420d85c7143f72ad3557f32c41ead.jpg
 351	Gwent: The Witcher Card Game	2018-10-23	https://media.rawg.io/media/games/742/7424c1f7d0a8da9ae29cd866f985698b.jpg
 352	Sonic Mania	2017-08-15	https://media.rawg.io/media/games/bbf/bbf8d74ab64440ad76294cff2f4d9cfa.jpg
-353	Monaco: What's Yours Is Mine	2013-04-24	https://media.rawg.io/media/screenshots/4f4/4f4722571e32954af43a4508607c1748.jpg
 354	Lara Croft and the Guardian of Light	2010-08-05	https://media.rawg.io/media/games/a92/a92272ea5cfc35b8ad6317fbd81ce0f6.jpg
 355	The Flame in the Flood	2016-02-23	https://media.rawg.io/media/games/87a/87a29bcc56b6b6082ead1dd5e2510aaa.jpg
 356	The Elder Scrolls III: Morrowind	2002-05-01	https://media.rawg.io/media/games/ccf/ccf26f6e3d553a04f0033a8107a521b8.jpg
@@ -3831,7 +3986,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 370	Deponia	2012-01-27	https://media.rawg.io/media/games/c2e/c2e6ad5c838d551aeff376f1f3d9d65e.jpg
 371	Star Wars: Battlefront II (2005)	2005-10-30	https://media.rawg.io/media/games/662/6625a20ca1d13699ee7c191b20a02408.jpg
 372	Outer Wilds	2019-05-29	https://media.rawg.io/media/games/9f4/9f418898f5415668ca47b5f4ab1ecfeb.jpg
-373	Assassin's Creed Revelations	2011-11-15	https://media.rawg.io/media/games/193/19390fa5e75e9048b22c9a736cf9992f.jpg
 374	Dust: An Elysian Tail	2012-08-15	https://media.rawg.io/media/games/c40/c40f9f0a3d1b4601a7a44d230c95f126.jpg
 375	DiRT Showdown	2012-05-24	https://media.rawg.io/media/games/23d/23d78acedbb5f40c9fb64e73af5af65d.jpg
 376	Max Payne 2: The Fall of Max Payne	2003-10-14	https://media.rawg.io/media/games/6fd/6fd971ffa72faa1758960d25ef6196bc.jpg
@@ -3873,11 +4027,9 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 412	Life is Strange: Before The Storm	2017-08-31	https://media.rawg.io/media/games/214/2140885d34e3a3398b45036e5d870971.jpg
 413	Torchlight	2009-10-26	https://media.rawg.io/media/games/b17/b175178f8842276b8b18b339fe3146a1.jpg
 414	Call of Duty 4: Modern Warfare	2007-11-05	https://media.rawg.io/media/games/9fb/9fbaea2168caea1f806546dfdaaeb1da.jpg
-415	Assassin's Creed Valhalla	2020-11-10	https://media.rawg.io/media/games/934/9346092ae11bf7582c883869468171cc.jpg
 416	Star Wars Jedi Knight: Jedi Academy	2003-09-16	https://media.rawg.io/media/games/7e8/7e8890a662539b1bdefcf57409aef765.jpg
 417	Gone Home	2013-08-14	https://media.rawg.io/media/games/9e5/9e5b91a6d02e66b8d450a977a59ae123.jpg
 418	Awesomenauts	2012-05-01	https://media.rawg.io/media/screenshots/4df/4df0b0812fd89af2285e683fb78f1323.jpg
-419	Baldur's Gate III	2023-08-03	https://media.rawg.io/media/games/699/69907ecf13f172e9e144069769c3be73.jpg
 420	Orcs Must Die! 2	2012-07-30	https://media.rawg.io/media/games/725/725eb4171c8aacee030a2d050ebf9fad.jpg
 421	Alien Swarm	2010-07-19	https://media.rawg.io/media/screenshots/a65/a65e9f01832997a4d913b3ea86319af4.jpg
 422	Sonic Generations	2011-11-01	https://media.rawg.io/media/games/9a1/9a18c226cf379272c698f26d2b79b3da.jpg
@@ -3911,7 +4063,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 450	Furi	2016-07-04	https://media.rawg.io/media/games/556/556157feed9ee1f55f2b12b2973e30a3.jpg
 451	Genshin Impact	2020-09-28	https://media.rawg.io/media/games/c38/c38bdb5da139005777176d33c463d70f.jpg
 452	Prince of Persia (2008)	2008-12-02	https://media.rawg.io/media/games/956/95640d5ea0288c187dbce849a4254a41.jpg
-453	Mirror's Edge Catalyst	2016-06-07	https://media.rawg.io/media/games/257/257c497aa4060f4a697ccbf5e99ec230.jpg
 454	Prototype	2009-06-09	https://media.rawg.io/media/games/b74/b74b15a48ac7bc37fbb42ee4afcc0b91.jpg
 455	Hitman: Codename 47	2000-11-19	https://media.rawg.io/media/games/3f6/3f6a397ec36acfcc18bb6ab3414c7658.jpg
 456	SteamWorld Dig	2013-08-08	https://media.rawg.io/media/games/e07/e07737df8469bf32d132ba9eaffc3461.jpg
@@ -3929,7 +4080,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 468	The Vanishing of Ethan Carter	2014-09-25	https://media.rawg.io/media/games/90c/90caf1fcb836cad70013452f6f239008.jpg
 469	Need for Speed Heat	2019-11-08	https://media.rawg.io/media/games/370/3703c683968a54f09630dcf03366ea35.jpg
 470	Overlord II	2009-06-22	https://media.rawg.io/media/games/bfb/bfb2bf7a0413443b1fcf0be7c3244053.jpg
-471	Uncharted: Drake's Fortune	2007-11-19	https://media.rawg.io/media/games/f2e/f2e6dcf9c27d99ba2551f1094ad41756.jpg
 472	Dead Rising 2	2010-08-31	https://media.rawg.io/media/games/7e7/7e79e3296a7f64e7535c9e5bb5aa4b53.jpg
 473	Unravel	2016-02-09	https://media.rawg.io/media/games/cfe/cfe114c081281960bd79ace5209c0a4a.jpg
 474	Thomas Was Alone	2012-06-30	https://media.rawg.io/media/games/6c8/6c8cb4780ce30b76b944cf656e8fff49.jpg
@@ -3937,7 +4087,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 476	Super Mario Odyssey	2017-10-27	https://media.rawg.io/media/games/267/267bd0dbc496f52692487d07d014c061.jpg
 477	Star Wars Jedi Knight II: Jedi Outcast	2002-03-01	https://media.rawg.io/media/games/0a5/0a56e2bb9ce95359e69ff9689c553a45.jpg
 478	Tropico 5	2014-05-22	https://media.rawg.io/media/games/3c9/3c994986d767f56e7b72a124a35d4c3c.jpg
-479	Tom Clancy's Ghost Recon Wildlands	2017-03-06	https://media.rawg.io/media/games/72e/72e0e063c817e90c696b2da3ea78abaa.jpg
 480	SpeedRunners	2016-04-19	https://media.rawg.io/media/games/9e5/9e52a797f049e701d4eee84774a99007.jpg
 482	Dungeons 2	2015-04-23	https://media.rawg.io/media/games/476/4767c380895fd35a4f1b59016dc45967.jpg
 483	Alpha Protocol	2010-04-08	https://media.rawg.io/media/games/8b9/8b9e77be7f0f7941b11ae4b21ca2db43.jpg
@@ -3980,14 +4129,12 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 520	DiRT Rally 2.0	2019-02-26	https://media.rawg.io/media/games/8f3/8f306808c45a4dbe0cd698e0b142af08.jpg
 521	Lost Ark	2022-02-11	https://media.rawg.io/media/games/d9e/d9e868382c48ec98c9b23b8fbe6a2045.jpg
 522	Overwatch	2016-05-24	https://media.rawg.io/media/games/4ea/4ea507ceebeabb43edbc09468f5aaac6.jpg
-523	Oddworld: New 'n' Tasty	2014-07-22	https://media.rawg.io/media/games/ba0/ba006ef12175ad4773e5964c320099c4.jpg
 524	Call of Duty: Advanced Warfare	2014-11-03	https://media.rawg.io/media/games/e05/e053aae547e0978ad90280a1a3d8f177.jpg
 525	Orcs Must Die!	2011-10-05	https://media.rawg.io/media/games/417/4176298c1b22ccd338ce3dfc34eb7e28.jpg
 526	Vanquish	2010-10-19	https://media.rawg.io/media/games/88a/88af17cc08783ccdd1608ae63c47eeac.jpg
 527	The Dark Pictures Anthology: Man of Medan	2019-08-30	https://media.rawg.io/media/games/206/2060eda39e4646bbe90b55ab7495c173.jpg
 528	Prince of Persia: The Sands of Time	2003-10-28	https://media.rawg.io/media/games/99b/99b39612e864d6ddfdb2c407fd9010a1.jpg
 529	Anomaly: Warzone Earth	2011-04-07	https://media.rawg.io/media/games/d28/d28e64fd1af23d1846d20b47dfa933f8.jpeg
-530	Tom Clancy's Splinter Cell: Conviction	2010-04-13	https://media.rawg.io/media/games/366/366e521df82c81218984915203aa3644.jpg
 531	HELLDIVERS	2015-12-07	https://media.rawg.io/media/games/ae3/ae357d6e6f9e89597e8293469ddabba9.jpg
 532	Star Wars: Republic Commando	2005-03-01	https://media.rawg.io/media/games/b1d/b1de33eca64ad293702d9554f5ac5cd5.jpg
 533	LEGO Star Wars - The Complete Saga	2007-11-06	https://media.rawg.io/media/games/cf3/cf39c637f18800b6d3f65d640a8ebbaa.jpg
@@ -4036,8 +4183,6 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 725	Darkest Dungeon	2016-01-18	https://media.rawg.io/media/games/fd9/fd92f105dcd6491bc5d61135033d1f19.jpg
 726	Star Wars: Knights of the Old Republic	2003-07-15	https://media.rawg.io/media/games/6e0/6e0c19bb111bd4fa20cf0eb72a049519.jpg
 727	Resident Evil 4 (2005)	2005-01-11	https://media.rawg.io/media/games/fee/fee0100afd87b52bfbd33e26689fa26c.jpg
-728	Assassin's Creed Unity	2014-11-11	https://media.rawg.io/media/games/59f/59fc1c5de1d29cb9234741c97d250150.jpg
-729	Don't Starve	2013-04-22	https://media.rawg.io/media/games/f3e/f3eec35c6218dcfd93a537751e6bfa61.jpg
 730	Call of Duty: Black Ops	2010-11-09	https://media.rawg.io/media/games/410/41033a495ce8f7fd4b0934bdb975f12a.jpg
 731	Chivalry: Medieval Warfare	2012-10-16	https://media.rawg.io/media/games/7f0/7f021d4a3577ac9d591a628a431fc2e5.jpg
 732	The Binding of Isaac	2011-09-28	https://media.rawg.io/media/games/cef/cefedf18016cbab466861eb698daf988.jpg
@@ -4056,14 +4201,13 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 745	SUPERHOT	2016-02-24	https://media.rawg.io/media/screenshots/ad4/ad445a12ee46543d4d117f3893041ebf.jpg
 746	Battlefield 4	2013-10-29	https://media.rawg.io/media/games/ac7/ac7b8327343da12c971cfc418f390a11.jpg
 747	What Remains of Edith Finch	2017-04-23	https://media.rawg.io/media/games/34e/34e100b1f648de99f32d477065f04653.jpg
-748	Uncharted 3: Drake's Deception	2011-11-01	https://media.rawg.io/media/games/589/589fc47c5ae34160d65c4682e21fed66.jpg
 749	Homefront	2011-03-15	https://media.rawg.io/media/games/657/657574cd437df9102f511b3be095b0ea.jpg
 750	Call of Duty: WWII	2017-11-03	https://media.rawg.io/media/games/1e5/1e5e33b88be978f451196a751424a72e.jpg
 \.
 
 
 --
--- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.genres (genreid, name) FROM stdin;
@@ -4090,7 +4234,7 @@ COPY public.genres (genreid, name) FROM stdin;
 
 
 --
--- Data for Name: platform; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: platform; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.platform (platformid, name) FROM stdin;
@@ -4104,114 +4248,105 @@ COPY public.platform (platformid, name) FROM stdin;
 8	Android
 9	Nintendo 3DS
 10	Nintendo DS
-11	Nintendo DSi
 12	macOS
 13	Linux
 14	Xbox 360
 15	Xbox
 16	PlayStation 3
 17	PlayStation 2
-18	PlayStation
 19	PS Vita
 20	PSP
 21	Wii U
 22	Wii
 23	GameCube
-24	Nintendo 64
 25	Game Boy Advance
-26	Game Boy Color
-27	Game Boy
-28	SNES
-29	NES
 30	Classic Macintosh
-31	Apple II
-32	Commodore / Amiga
-33	Atari 7800
-34	Atari 5200
-35	Atari 2600
-36	Atari Flashback
-37	Atari 8-bit
-38	Atari ST
-39	Atari Lynx
-40	Atari XEGS
-41	Genesis
-42	SEGA Saturn
-43	SEGA CD
-44	SEGA 32X
-45	SEGA Master System
 46	Dreamcast
-47	3DO
-48	Jaguar
-49	Game Gear
-50	Neo Geo
 51	Web
 \.
 
 
 --
--- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.reviews (reviewid, userid, gameid, content, rating, date_posted) FROM stdin;
+1	1	1	Direct test	5	2025-07-29 07:09:11.701995
+2	6	550	El mejor juego del mundo mi pa	5	2025-07-29 10:15:34.937615
+3	6	1	Test test test test	1	2025-07-29 10:16:57.031137
+4	6	344	sdfgsdfgsdfgasgad	5	2025-07-29 10:28:33.27219
+5	6	88	block game funny 👍	5	2025-07-29 12:37:33.688957
+6	6	20	Rafadote el Keanu Reeves	5	2025-07-29 13:46:28.929953
+7	6	226	Juego bien cristiano 💪	5	2025-07-29 14:31:58.631312
+8	6	227	amogus sus imposter	5	2025-07-29 15:28:49.147255
+9	6	264	Escalar montañas el videojuego	5	2025-07-29 16:35:24.963096
+10	6	746	Ping pong chingadazos	5	2025-07-29 16:35:46.9878
 \.
 
 
 --
--- Data for Name: user_favorites; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: user_favorites; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.user_favorites (userid, gameid) FROM stdin;
+6	227
+6	550
+6	20
+6	226
+6	746
+6	264
 \.
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: admin
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.users (userid, username, email, password) FROM stdin;
 1	alejandro		$2y$10$1RuhvcMRgHbCCn1tt3awdez9CuFTSE.p/2keukXo2lIBtEs7jRuJ.
 4	alejandro2	a@a.com	$2y$10$1Nzf7rIzx5K9kt.VxozGHu0fXzOjVXQGA9dy9X4x1MUu0G8M8UNay
 5	alejandro3	b@b.com	$2y$10$hBA92be3CpI5qKvxO/nmMuwv09zGQcTD721wZ8lvufpnJYi2nd0cW
+6	Mamaguevo	ab@cd.com	$2y$10$J9iA6YBi4DC8XDpwbvpwdekIWNZ.OY6W0PW2rV0e1Mfwh4AkqYVze
 \.
 
 
 --
--- Name: games_gameid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: games_gameid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.games_gameid_seq', 1051, true);
 
 
 --
--- Name: genres_genreid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: genres_genreid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.genres_genreid_seq', 19, true);
 
 
 --
--- Name: platform_platformid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: platform_platformid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.platform_platformid_seq', 51, true);
 
 
 --
--- Name: reviews_reviewid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+-- Name: reviews_reviewid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.reviews_reviewid_seq', 1, false);
-
-
---
--- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
---
-
-SELECT pg_catalog.setval('public.users_userid_seq', 5, true);
+SELECT pg_catalog.setval('public.reviews_reviewid_seq', 10, true);
 
 
 --
--- Name: game_genre game_genre_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.users_userid_seq', 6, true);
+
+
+--
+-- Name: game_genre game_genre_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.game_genre
@@ -4219,7 +4354,7 @@ ALTER TABLE ONLY public.game_genre
 
 
 --
--- Name: game_platform game_platform_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: game_platform game_platform_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.game_platform
@@ -4227,7 +4362,7 @@ ALTER TABLE ONLY public.game_platform
 
 
 --
--- Name: games games_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: games games_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.games
@@ -4235,7 +4370,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: games games_unique; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: games games_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.games
@@ -4243,7 +4378,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.genres
@@ -4251,7 +4386,7 @@ ALTER TABLE ONLY public.genres
 
 
 --
--- Name: platform platform_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: platform platform_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.platform
@@ -4259,7 +4394,7 @@ ALTER TABLE ONLY public.platform
 
 
 --
--- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.reviews
@@ -4267,7 +4402,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: user_favorites user_favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: user_favorites user_favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.user_favorites
@@ -4275,7 +4410,7 @@ ALTER TABLE ONLY public.user_favorites
 
 
 --
--- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -4283,7 +4418,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -4291,7 +4426,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: admin
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -4299,7 +4434,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: game_genre game_genre_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: game_genre game_genre_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.game_genre
@@ -4307,7 +4442,7 @@ ALTER TABLE ONLY public.game_genre
 
 
 --
--- Name: game_genre game_genre_genreid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: game_genre game_genre_genreid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.game_genre
@@ -4315,7 +4450,7 @@ ALTER TABLE ONLY public.game_genre
 
 
 --
--- Name: game_platform game_platform_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: game_platform game_platform_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.game_platform
@@ -4323,7 +4458,7 @@ ALTER TABLE ONLY public.game_platform
 
 
 --
--- Name: game_platform game_platform_platformid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: game_platform game_platform_platformid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.game_platform
@@ -4331,7 +4466,7 @@ ALTER TABLE ONLY public.game_platform
 
 
 --
--- Name: reviews reviews_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: reviews reviews_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.reviews
@@ -4339,7 +4474,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: reviews reviews_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: reviews reviews_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.reviews
@@ -4347,7 +4482,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: user_favorites user_favorites_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: user_favorites user_favorites_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.user_favorites
@@ -4355,18 +4490,11 @@ ALTER TABLE ONLY public.user_favorites
 
 
 --
--- Name: user_favorites user_favorites_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+-- Name: user_favorites user_favorites_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.user_favorites
     ADD CONSTRAINT user_favorites_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid);
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: admin
---
-
-REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 
 
 --
