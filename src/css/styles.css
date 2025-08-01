@@ -1,27 +1,81 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONDO PRINCIPAL */
+body {
+    background-color: green;
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #fff;
+    padding: 20px;
+}
+
+/* FORMULARIO DE RESEÑA */
 .review-form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    max-width: 300px;
+    gap: 10px;
+    max-width: 400px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
 }
+
+.review-form textarea,
+.review-form select,
+.review-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
 .review-form textarea {
-    min-height: 80px;
-    padding: 5px;
-}
-.review-form select, .review-form button {
-    padding: 5px;
+    min-height: 100px;
+    resize: vertical;
 }
 
-/* Clickable row styles */
-.game-row {
+.review-form button {
+    background-color: #1e90ff;
+    color: white;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
-}
-.game-row:hover {
-    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
 }
 
-/* Modal styles */
+.review-form button:hover {
+    background-color: #007acc;
+}
+
+/* FILAS DE JUEGOS */
+.game-row {
+    background-color: #0e2a47;
+    margin: 10px 0;
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.game-row:hover {
+    background-color: #14345b;
+}
+
+/* Estilo visual tipo tarjeta colorida para cada fila */
+.game-row:nth-child(1) { border-color: #e91e63; }
+.game-row:nth-child(2) { border-color: #03a9f4; }
+.game-row:nth-child(3) { border-color: #4caf50; }
+.game-row:nth-child(4) { border-color: #ffc107; }
+.game-row:nth-child(5) { border-color: #ff5722; }
+.game-row:nth-child(6) { border-color: #3f51b5; }
+
+/* MODAL GENERAL */
 .modal {
     display: none;
     position: fixed;
@@ -30,47 +84,57 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.7);
 }
 
+/* MODAL INTERNO */
 .modal-content {
-    background-color: white;
+    background-color: #ffffff;
     margin: 2% auto;
-    border-radius: 8px;
+    border-radius: 12px;
     width: 90%;
     max-width: 1000px;
     height: 90%;
     position: relative;
     display: flex;
+    overflow: hidden;
+    color: #000;
 }
 
+/* MODAL LADO IZQUIERDO */
 .modal-left {
     width: 50%;
     padding: 20px;
+    background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* MODAL LADO DERECHO */
 .modal-right {
     width: 50%;
     padding: 20px;
     overflow-y: auto;
+    background-color: #fff;
     border-left: 1px solid #ddd;
 }
 
+/* PORTADA DEL JUEGO */
 .game-cover {
     max-width: 100%;
     max-height: 400px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
+/* INFORMACIÓN DEL JUEGO */
 .game-info {
     margin-top: 20px;
     text-align: center;
 }
 
+/* BOTÓN CERRAR MODAL */
 .close-modal {
     position: absolute;
     right: 15px;
@@ -85,14 +149,17 @@
     color: #000;
 }
 
+/* CAJA DE RESEÑAS */
 .review-box {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    color: #333;
 }
 
+/* CABECERA DE RESEÑA */
 .review-header {
     display: flex;
     justify-content: space-between;
@@ -102,7 +169,7 @@
 
 .review-username {
     font-weight: bold;
-    color: #333;
+    color: #222;
 }
 
 .review-rating {
@@ -114,12 +181,14 @@
     color: #555;
 }
 
+/* FORMULARIO DE NUEVA RESEÑA */
 .new-review-form {
     background-color: #fff;
     border: 2px solid #007bff;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
+    color: #000;
 }
 
 .new-review-form h3 {
@@ -137,22 +206,15 @@
     font-weight: bold;
 }
 
-.form-group textarea {
-    width: calc(100% - 20px); /* Account for padding */
-    min-height: 100px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    resize: vertical;
-    box-sizing: border-box;
-}
-
+.form-group textarea,
 .form-group select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
     box-sizing: border-box;
+    resize: vertical;
+    font-family: inherit;
 }
 
 .submit-review-btn {
@@ -160,9 +222,10 @@
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .submit-review-btn:hover {
@@ -171,10 +234,11 @@
 
 .no-reviews {
     text-align: center;
-    color: #888;
+    color: #bbb;
     font-style: italic;
     padding: 20px;
 }
+
 .center {
     text-align: center;
 }
