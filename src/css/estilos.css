@@ -1,79 +1,61 @@
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* FONDO PRINCIPAL */
+/* Base body style */
 body {
-    background-color: green;
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #fff;
-    padding: 20px;
-}
-
-/* FORMULARIO DE RESEÑA */
-.review-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 10px;
-    backdrop-filter: blur(6px);
-}
-
-.review-form textarea,
-.review-form select,
-.review-form button {
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: inherit;
-}
-
-.review-form textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.review-form button {
-    background-color: #1e90ff;
+    margin: 0;
+    background-color: #041837;
+    font-family: 'Segoe UI', sans-serif;
     color: white;
+}
+
+/* Main navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 100px;
+    background-color: #061e3b;
+}
+
+/* Left (LOGO / Title) */
+.nav-left h1 {
+    margin: 0;
+    font-size: 20px;
+    color: white;
+}
+
+/* Center (Navigation links) */
+.nav-center {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-center a {
+    color: white;
+    text-decoration: none;
     font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.review-form button:hover {
-    background-color: #007acc;
+.nav-center a:hover {
+    color: #1c9eff;
 }
 
-/* FILAS DE JUEGOS */
-.game-row {
-    background-color: #0e2a47;
-    margin: 10px 0;
-    padding: 16px;
-    border-radius: 12px;
-    border: 2px solid transparent;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
+/* Right (User session / Auth links) */
+.nav-right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
-.game-row:hover {
-    background-color: #14345b;
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
 }
 
-/* Estilo visual tipo tarjeta colorida para cada fila */
-.game-row:nth-child(1) { border-color: #e91e63; }
-.game-row:nth-child(2) { border-color: #03a9f4; }
-.game-row:nth-child(3) { border-color: #4caf50; }
-.game-row:nth-child(4) { border-color: #ffc107; }
-.game-row:nth-child(5) { border-color: #ff5722; }
-.game-row:nth-child(6) { border-color: #3f51b5; }
+.nav-right a:hover {
+    color: #facc15;
+}
+
+
 
 /* MODAL GENERAL */
 .modal {
@@ -241,4 +223,22 @@ body {
 
 .center {
     text-align: center;
+}
+
+.star-rating {
+    display: flex;
+    gap: 6px;
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.star-rating .star {
+    color: #ccc;
+    transition: color 0.2s ease;
+}
+
+.star-rating .star.hover,
+.star-rating .star.selected {
+    color: #ffc107;
 }

@@ -160,3 +160,38 @@ function toggleFavorite(btn) {
         .catch(() => alert('Error al cambiar favorito'))
         .finally(() => btn.disabled = false);
 }
+
+// ⭐ Estrellas de calificación (rating interactivo)
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star-rating .star');
+    const ratingInput = document.getElementById('reviewRating');
+
+    if (!stars.length || !ratingInput) return;
+
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+        const value = parseInt(star.dataset.value);
+
+        star.addEventListener('mouseenter', () => {
+            stars.forEach(s => s.classList.remove('hover'));
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.add('hover');
+            }
+        });
+
+        star.parentElement.addEventListener('mouseleave', () => {
+            stars.forEach(s => s.classList.remove('hover'));
+        });
+
+        star.addEventListener('click', () => {
+            selectedRating = value;
+            ratingInput.value = value;
+
+            stars.forEach(s => s.classList.remove('selected'));
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.add('selected');
+            }
+        });
+    });
+});

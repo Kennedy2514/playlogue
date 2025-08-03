@@ -100,41 +100,43 @@ try {
 ?>
 
 <!-- ==========================================
-     FRONTEND SECTION - SAFE TO MODIFY
-     ========================================== -->
-     
+FRONTEND SECTION - SAFE TO MODIFY
+========================================== -->
 <!DOCTYPE html>
 <html>
 <head>
     <!-- FRONTEND: Feel free to modify title and add more stylesheets -->
     <title>Playlogue - Catálogo</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
     <!-- FRONTEND: Navigation structure can be modified -->
-    <header>
-        <nav class="center">
-            <a href="index.php">Inicio</a> | 
-            <a href="favoritos.php">Mis Favoritos</a> | 
-            <a href="leaderboards.php">Leaderboards</a>
-        </nav>
-    </header>
+<body>
+    
+<header class="navbar">
+    <div class="nav-left">
+        <h1>PLAYLOGUE</h1>
+    </div>
 
-    <!-- FRONTEND: Layout and styling can be modified -->
-    <h1>Playlogue</h1>
+    <nav class="nav-center">
+        <a href="index.php">Inicio</a>
+        <a href="favoritos.php">Mis Favoritos</a>
+        <a href="leaderboards.php">Leaderboards</a>
+    </nav>
 
-    <!-- FRONTEND: Login/Register section layout can be modified, but keep PHP logic intact -->
-    <?php if (isset($_SESSION['user'])): ?>
-        <p>Bienvenido, <?= htmlspecialchars($_SESSION['user']['username']) ?> | 
-        <a href="api/logout.php">Cerrar sesión</a></p>
-    <?php else: ?>
-        <p>¿Ya tienes una cuenta? <a href="login_form.php">Inicia sesión</a> o <a href="register_form.php">Regístrate</a></p>
-    <?php endif; ?>
+    <div class="nav-right">
+        <?php if (isset($_SESSION['user'])): ?>
+            <span>Bienvenido, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
+            <a href="api/logout.php">Cerrar sesión</a>
+        <?php else: ?>
+            <a href="login_form.php">Inicia sesión</a>
+            <a href="register_form.php">Regístrate</a>
+        <?php endif; ?>
+    </div>  
+</header>
+<!-- TERMINA EL AREA DE NAV -->
 
-    <hr>
-
-    <!-- FRONTEND: Filter form styling and layout can be modified, but keep form names and values intact -->
-    <form method="GET" action="index.php" id="filtersForm" style="margin-bottom: 1rem;">
+    <!-- TODO ESTO ES LA PARTE PARA FILTRAR LOS JUEGOS -->
+    <form method="GET" action="index.php" id="filtersForm">
         <input type="text" name="search" placeholder="Buscar juegos..." value="<?= htmlspecialchars($search) ?>" />
         
         <fieldset style="display:inline-block; margin-left: 1rem;">
@@ -159,7 +161,6 @@ try {
             <?php endforeach; ?>
         </fieldset>
 
-        <label style="margin-left: 1rem;">
             Ordenar por:
             <select name="order">
                 <option value="title" <?= $orderBy === 'title' ? 'selected' : '' ?>>Nombre</option>
@@ -169,8 +170,9 @@ try {
 
         <button type="submit" style="margin-left: 1rem;">Filtrar</button>
     </form>
+    <!-- AQUI TERMINA ESTA SECCION DE FILTRADO -->
 
-    <!-- FRONTEND: Table structure can be modified, but keep PHP data output intact -->
+    <!-- ESTO ES LA TABLA O LISTADO DE LOS JUEGOS -->
     <table>
         <thead>
             <tr>
@@ -213,8 +215,9 @@ try {
             <?php endwhile; ?>
         </tbody>
     </table>
+    <!-- AQUI TERMINA EL LISTADO DE LOS JUEGOS EN TABLA -->
 
-    <!-- FRONTEND: Pagination styling can be modified -->
+    <!-- ESTA PARTE ES EL BOTON DE LAS PAGINAS ANTERIOR Y SIGUIENTE-->
     <div>
         <?php
         $totalPages = ceil($totalGames / $gamesPerPage);
@@ -238,8 +241,9 @@ try {
             <a href="<?= buildPageUrl($currentPage + 1, $queryString, $baseUrl) ?>">Siguiente</a>
         <?php endif; ?>
     </div>
+    <!-- AQUI TERMINA-->
 
-    <!-- FRONTEND: Modal structure and styling can be modified, but keep IDs and data attributes intact -->
+    <!-- ESTA ES LA ESTRUCTURA DE LA RESEÑA -->
     <div id="gameModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeGameModal()">&times;</span>
@@ -254,6 +258,7 @@ try {
                     <button id="favoriteBtn" >Cargando...</button>
                 </div>
             </div>
+        
 
             <div class="modal-right">
                 <h3>Reseñas</h3>
@@ -274,15 +279,16 @@ try {
 
                         <div class="form-group">
                             <label for="reviewRating">Calificación:</label>
-                            <select id="reviewRating" name="rating" required>
-                                <option value="">Selecciona calificación</option>
-                                <option value="1">1★</option>
-                                <option value="2">2★</option>
-                                <option value="3">3★</option>
-                                <option value="4">4★</option>
-                                <option value="5">5★</option>
-                            </select>
+                            <div class="star-rating" id="starRating">
+                                <span data-value="1" class="star">&#9734;</span>
+                                <span data-value="2" class="star">&#9734;</span>
+                                <span data-value="3" class="star">&#9734;</span>
+                                <span data-value="4" class="star">&#9734;</span>
+                                <span data-value="5" class="star">&#9734;</span>
+                            </div>
+                            <input type="hidden" name="rating" id="reviewRating" required>
                         </div>
+
 
                         <button type="submit" class="submit-review-btn">Enviar Reseña</button>
                     </form>
@@ -295,6 +301,7 @@ try {
             </div>
         </div>
     </div>
+    <!-- AQUI TERMINA -->`
 
     <!-- FRONTEND: Feel free to add more JavaScript files or modify existing ones -->
     <script src="js/script.js"></script>
