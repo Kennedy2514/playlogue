@@ -241,48 +241,50 @@ FRONTEND SECTION - SAFE TO MODIFY
     <!-- AQUI TERMINA-->
 
     <!-- ESTA ES LA ESTRUCTURA DE LA RESEÑA -->
-    <div id="gameModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeGameModal()">&times;</span>
-
-            <div class="modal-left">
-                <img id="gameCover" class="game-cover" src="" alt="Game Cover">
-                <div class="game-info">
-                    <h2 id="gameTitle"></h2>
-                    <p><strong>Plataformas:</strong> <span id="gamePlatforms"></span></p>
-                    <p><strong>Géneros:</strong> <span id="gameGenres"></span></p>
-                    <p><strong>Rating:</strong> <span id="gameRating"></span></p>
-                    <button id="favoriteBtn" >Cargando...</button>
-                </div>
-            </div>
+<!-- PUEDES MODIFICAR: Estructura y estilos del modal, pero NO los IDs ni nombres de clases usados por JS -->
+<div id="gameModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeGameModal()">&times;</span>
         
-
-            <div class="modal-right">
-                <h3>Reseñas</h3>
-                <div id="reviewsContainer">
-                    <div class="no-reviews">Cargando reseñas...</div>
-                </div>
-
-                <?php if (isset($_SESSION['user'])): ?>
-                <div class="new-review-form">
-                    <h3>Añadir tu reseña</h3>
-                    <form id="newReviewForm">
-                        <input type="hidden" id="reviewGameId" name="gameid">
-
-                        <div class="form-group">
-                            <label for="reviewContent">Tu reseña:</label>
-                            <textarea id="reviewContent" name="content" placeholder="Escribe tu reseña (mínimo 10 caracteres)" required></textarea>
-                        </div>
+        <div class="modal-left">
+            <img id="gameCover" class="game-cover" src="" alt="Game Cover">
+            <div class="game-info">
+                <h2 id="gameTitle"></h2>
+                <p><strong>Plataformas:</strong> <span id="gamePlatforms"></span></p>
+                <p><strong>Géneros:</strong> <span id="gameGenres"></span></p>
+                <p><strong>Rating:</strong> <span id="gameRating"></span></p>
+                <button id="favoriteBtn">Cargando...</button>
+            </div>
+        </div>
+        
+        <div class="modal-right">
+            <h3>Reseñas</h3>
+            <div id="reviewsContainer">
+                <div class="no-reviews">Cargando reseñas...</div>
+            </div>
+            
+            <?php if (isset($_SESSION['user'])): ?>
+            <!-- PUEDES MODIFICAR: Estilos y estructura del formulario, pero NO los IDs ni names -->
+            <div class="new-review-form">
+                <h3>Añadir tu reseña</h3>
+                <form id="newReviewForm">
+                    <input type="hidden" id="reviewGameId" name="gameid">
+                    
+                    <div class="form-group">
+                        <label for="reviewContent">Tu reseña:</label>
+                        <textarea id="reviewContent" name="content" placeholder="Escribe tu reseña (mínimo 10 caracteres)" required></textarea>
+                    </div>
 
                         <div class="form-group">
                             <label for="reviewRating">Calificación:</label>
                             <div class="star-rating" id="starRating">
-                                <span data-value="1" class="star">&#9734;</span>
-                                <span data-value="2" class="star">&#9734;</span>
-                                <span data-value="3" class="star">&#9734;</span>
-                                <span data-value="4" class="star">&#9734;</span>
-                                <span data-value="5" class="star">&#9734;</span>
+                                <span data-value="1" class="star">&#9733;</span>
+                                <span data-value="2" class="star">&#9733;</span>
+                                <span data-value="3" class="star">&#9733;</span>
+                                <span data-value="4" class="star">&#9733;</span>
+                                <span data-value="5" class="star">&#9733;</span>
                             </div>
+
                             <input type="hidden" name="rating" id="reviewRating" required>
                         </div>
 
@@ -298,7 +300,7 @@ FRONTEND SECTION - SAFE TO MODIFY
             </div>
         </div>
     </div>
-    <!-- AQUI TERMINA -->`
+    <!-- AQUI TERMINA -->
 
     <!-- FRONTEND: Feel free to add more JavaScript files or modify existing ones -->
     <script src="js/script.js"></script>

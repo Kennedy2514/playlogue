@@ -161,7 +161,6 @@ function toggleFavorite(btn) {
         .finally(() => btn.disabled = false);
 }
 
-// ⭐ Estrellas de calificación (rating interactivo)
 document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star-rating .star');
     const ratingInput = document.getElementById('reviewRating');
@@ -170,30 +169,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedRating = 0;
 
+    const updateStars = (rating) => {
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    };
+
     stars.forEach(star => {
         const value = parseInt(star.dataset.value);
 
         star.addEventListener('mouseenter', () => {
-            stars.forEach(s => s.classList.remove('hover'));
-            for (let i = 0; i < value; i++) {
-                stars[i].classList.add('hover');
-            }
+            updateStars(value); // hover provisional
         });
 
         star.parentElement.addEventListener('mouseleave', () => {
-            stars.forEach(s => s.classList.remove('hover'));
+            updateStars(selectedRating); // vuelve al rating actual
         });
 
         star.addEventListener('click', () => {
             selectedRating = value;
             ratingInput.value = value;
-
-            stars.forEach(s => s.classList.remove('selected'));
-            for (let i = 0; i < value; i++) {
-                stars[i].classList.add('selected');
-            }
+            updateStars(selectedRating);
         });
     });
+
+    // Inicializar si hay un valor ya
+    if (ratingInput.value) {
+        selectedRating = parseInt(ratingInput.value);
+        updateStars(selectedRating);
+    }
 });
 
 // Agregar funcionalidad de clic para navegadores sin soporte :has()

@@ -50,25 +50,29 @@ try {
     <link rel="stylesheet" href="/css/estilos.css"> <!-- PUEDES MODIFICAR: Ruta y estilos del CSS -->
 </head>
 <body>
-<header>
-    <nav class="center">
-        <!-- PUEDES MODIFICAR: Enlaces de navegación y estilos -->
-        <a href="index.php">Inicio</a> | 
-        <a href="favoritos.php">Mis Favoritos</a> | 
+<header class="navbar">
+    <div class="nav-left">
+        <h1>PLAYLOGUE</h1>
+    </div>
+
+    <nav class="nav-center">
+        <a href="index.php">Inicio</a>
+        <a href="favoritos.php">Mis Favoritos</a>
         <a href="leaderboards.php">Leaderboards</a>
     </nav>
+
+    <div class="nav-right">
+        <?php if (isset($_SESSION['user'])): ?>
+            <span>Bienvenido, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
+            <a href="api/logout.php">Cerrar sesión</a>
+        <?php else: ?>
+            <a href="login_form.php">Inicia sesión</a>
+            <a href="register_form.php">Regístrate</a>
+        <?php endif; ?>
+    </div>  
 </header>
 
 <h1>Top 10 Juegos Mejor Valorados</h1>
-
-<?php if (isset($_SESSION['user'])): ?>
-    <!-- PUEDES MODIFICAR: Mensaje de bienvenida y enlace de logout (solo estilos o ubicación, NO la lógica PHP) -->
-    <p>Hola, <?= htmlspecialchars($_SESSION['user']['username']) ?> | 
-    <a href="api/logout.php">Cerrar sesión</a></p>
-<?php else: ?>
-    <!-- PUEDES MODIFICAR: Mensaje para usuarios no logueados -->
-    <p>Ya tienes una cuenta? <a href="login_form.php">Inicia sesión</a> o <a href="register_form.php">Regístrate</a></p>
-<?php endif; ?>
 
 <hr>
 

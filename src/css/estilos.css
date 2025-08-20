@@ -65,7 +65,6 @@ body {
 /*           MODAL STYLES         */
 /* ============================= */
 
-/* Overlay */
 .modal {
     display: none;
     position: fixed;
@@ -74,70 +73,108 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease forwards;
 }
 
-/* Modal Container */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 .modal-content {
-    background-color: #ffffff;
+    background: linear-gradient(145deg, #0f1f3d, #1c2a59);
     margin: 2% auto;
-    border-radius: 12px;
+    border-radius: 20px;
     width: 90%;
     max-width: 1000px;
     height: 90%;
-    position: relative;
     display: flex;
     overflow: hidden;
-    color: #000;
+    color: #fff;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    transform: translateY(-20px);
+    animation: slideDown 0.4s ease forwards;
 }
 
-/* Left Side */
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 .modal-left {
     width: 50%;
-    padding: 20px;
-    background-color: #f5f5f5;
+    padding: 30px 20px;
+    background: linear-gradient(145deg, #1a2a4d, #0c1b33);
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-right: 2px solid rgba(255,255,255,0.1);
 }
 
-/* Right Side */
 .modal-right {
     width: 50%;
-    padding: 20px;
+    padding: 30px 20px;
     overflow-y: auto;
-    background-color: #fff;
-    border-left: 1px solid #ddd;
+    background: #0b1b33;
+    border-left: 2px solid rgba(255,255,255,0.1);
 }
 
-/* Game Cover Image */
 .game-cover {
     max-width: 100%;
     max-height: 400px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    border: 2px solid #1c9eff;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Game Info Section */
+.game-cover:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+}
+
 .game-info {
-    margin-top: 20px;
+    margin-top: 25px;
     text-align: center;
 }
 
-/* Close Button */
 .close-modal {
     position: absolute;
-    right: 15px;
-    top: 15px;
-    font-size: 28px;
+    right: 20px;
+    top: 20px;
+    font-size: 32px;
     font-weight: bold;
     cursor: pointer;
-    color: #aaa;
+    color: #ff4b5c;
+    transition: color 0.2s, transform 0.2s;
 }
 
 .close-modal:hover {
-    color: #000;
+    color: #fff;
+    transform: rotate(90deg);
 }
+
+/* Scrollbar personalizado para la derecha del modal */
+.modal-right::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-right::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+.modal-right::-webkit-scrollbar-thumb {
+    background: #1c9eff;
+    border-radius: 10px;
+}
+
+.modal-right::-webkit-scrollbar-thumb:hover {
+    background: #00b0ff;
+}
+
 
 /* ============================= */
 /*           REVIEWS              */
@@ -173,7 +210,6 @@ body {
     color: #555;
 }
 
-/* New Review Form */
 .new-review-form {
     background-color: #fff;
     border: 2px solid #007bff;
@@ -231,14 +267,10 @@ body {
     padding: 20px;
 }
 
-/* Center text helper */
-.center {
-    text-align: center;
-}
-
 /* ============================= */
 /*        STAR RATING             */
 /* ============================= */
+
 
 .star-rating {
     display: flex;

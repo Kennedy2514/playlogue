@@ -63,24 +63,32 @@ try {
 <head>
     <meta charset="UTF-8" />
     <title>Mis Favoritos - Playlogue</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/favoritos.css" />
 </head>
 <body>
-<header>
-    <nav class="center">
-        <!-- PUEDES MODIFICAR: Enlaces de navegación y estilos -->
-        <a href="index.php">Inicio</a> | 
-        <a href="favoritos.php">Mis Favoritos</a> | 
+<header class="navbar">
+    <div class="nav-left">
+        <h1>PLAYLOGUE</h1>
+    </div>
+
+    <nav class="nav-center">
+        <a href="index.php">Inicio</a>
+        <a href="favoritos.php">Mis Favoritos</a>
         <a href="leaderboards.php">Leaderboards</a>
     </nav>
+
+    <div class="nav-right">
+        <?php if (isset($_SESSION['user'])): ?>
+            <span>Bienvenido, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
+            <a href="api/logout.php">Cerrar sesión</a>
+        <?php else: ?>
+            <a href="login_form.php">Inicia sesión</a>
+            <a href="register_form.php">Regístrate</a>
+        <?php endif; ?>
+    </div>  
 </header>
 
 <h1>Mis Juegos Favoritos</h1>
-
-<!-- PUEDES MODIFICAR: Mensaje de bienvenida y enlace de logout (solo estilos o ubicación, NO la lógica PHP) -->
-<p>Bienvenido, <?= htmlspecialchars($_SESSION['user']['username']) ?> | <a href="api/logout.php">Cerrar sesión</a></p>
-
-<hr>
 
 <?php if (count($games) === 0): ?>
     <!-- PUEDES MODIFICAR: Mensaje cuando no hay favoritos -->
@@ -182,15 +190,13 @@ try {
                     </div>
                     
                     <div class="form-group">
-                        <label for="reviewRating">Calificación:</label>
-                        <select id="reviewRating" name="rating" required>
-                            <option value="">Selecciona calificación</option>
-                            <option value="1">1★</option>
-                            <option value="2">2★</option>
-                            <option value="3">3★</option>
-                            <option value="4">4★</option>
-                            <option value="5">5★</option>
-                        </select>
+                            <label for="reviewRating">Calificación:</label>
+                            <div class="star-rating" id="starRating">
+                                <span data-value="1" class="star">&#9733;</span>
+                                <span data-value="2" class="star">&#9733;</span>
+                                <span data-value="3" class="star">&#9733;</span>
+                                <span data-value="4" class="star">&#9733;</span>
+                                <span data-value="5" class="star">&#9733;</span>
                     </div>
                     
                     <button type="submit" class="submit-review-btn">Enviar Reseña</button>
