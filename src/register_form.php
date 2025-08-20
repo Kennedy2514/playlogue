@@ -14,6 +14,7 @@ unset($_SESSION['register_error']); // Limpiar después de mostrar
 <html>
 <head>
     <title>Registro - Playlogue</title>
+    <link rel="stylesheet" href="/css/registro.css">
     <!-- PUEDES MODIFICAR: Agregar CSS o meta etiquetas si lo necesitas -->
 </head>
 <body>

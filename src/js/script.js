@@ -195,3 +195,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Agregar funcionalidad de clic para navegadores sin soporte :has()
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('fieldset label').forEach(label => {
+        label.addEventListener('click', function(e) {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            if (checkbox) {
+                // Cambiar estado del checkbox
+                checkbox.checked = !checkbox.checked;
+                
+                // Aplicar estilos manualmente para compatibilidad
+                if (checkbox.checked) {
+                    this.style.backgroundColor = '#1c9eff';
+                    this.style.borderColor = 'white';
+                    this.style.fontWeight = 'bold';
+                } else {
+                    this.style.backgroundColor = '#0a264d';
+                    this.style.borderColor = 'transparent';
+                    this.style.fontWeight = 'normal';
+                }
+            }
+        });
+        
+        // Aplicar estilo inicial si ya está checked
+        const checkbox = label.querySelector('input[type="checkbox"]');
+        if (checkbox && checkbox.checked) {
+            label.style.backgroundColor = '#1c9eff';
+            label.style.borderColor = 'white';
+            label.style.fontWeight = 'bold';
+        }
+    });
+});

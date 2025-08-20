@@ -47,7 +47,7 @@ try {
 <html>
 <head>
     <title>Playlogue - Leaderboard</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- PUEDES MODIFICAR: Ruta y estilos del CSS -->
+    <link rel="stylesheet" href="/css/estilos.css"> <!-- PUEDES MODIFICAR: Ruta y estilos del CSS -->
 </head>
 <body>
 <header>

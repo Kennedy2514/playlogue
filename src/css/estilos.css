@@ -1,4 +1,7 @@
-/* Base body style */
+/* ============================= */
+/*          BASE STYLES           */
+/* ============================= */
+
 body {
     margin: 0;
     background-color: #041837;
@@ -6,7 +9,10 @@ body {
     color: white;
 }
 
-/* Main navbar container */
+/* ============================= */
+/*          NAVBAR STYLES         */
+/* ============================= */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -15,14 +21,14 @@ body {
     background-color: #061e3b;
 }
 
-/* Left (LOGO / Title) */
+/* Logo / Title (Left) */
 .nav-left h1 {
     margin: 0;
     font-size: 20px;
     color: white;
 }
 
-/* Center (Navigation links) */
+/* Navigation Links (Center) */
 .nav-center {
     display: flex;
     gap: 20px;
@@ -38,7 +44,7 @@ body {
     color: #1c9eff;
 }
 
-/* Right (User session / Auth links) */
+/* User Session / Auth Links (Right) */
 .nav-right {
     display: flex;
     gap: 15px;
@@ -55,9 +61,11 @@ body {
     color: #facc15;
 }
 
+/* ============================= */
+/*           MODAL STYLES         */
+/* ============================= */
 
-
-/* MODAL GENERAL */
+/* Overlay */
 .modal {
     display: none;
     position: fixed;
@@ -69,7 +77,7 @@ body {
     background-color: rgba(0,0,0,0.7);
 }
 
-/* MODAL INTERNO */
+/* Modal Container */
 .modal-content {
     background-color: #ffffff;
     margin: 2% auto;
@@ -83,7 +91,7 @@ body {
     color: #000;
 }
 
-/* MODAL LADO IZQUIERDO */
+/* Left Side */
 .modal-left {
     width: 50%;
     padding: 20px;
@@ -93,7 +101,7 @@ body {
     align-items: center;
 }
 
-/* MODAL LADO DERECHO */
+/* Right Side */
 .modal-right {
     width: 50%;
     padding: 20px;
@@ -102,7 +110,7 @@ body {
     border-left: 1px solid #ddd;
 }
 
-/* PORTADA DEL JUEGO */
+/* Game Cover Image */
 .game-cover {
     max-width: 100%;
     max-height: 400px;
@@ -110,13 +118,13 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* INFORMACIÓN DEL JUEGO */
+/* Game Info Section */
 .game-info {
     margin-top: 20px;
     text-align: center;
 }
 
-/* BOTÓN CERRAR MODAL */
+/* Close Button */
 .close-modal {
     position: absolute;
     right: 15px;
@@ -131,7 +139,10 @@ body {
     color: #000;
 }
 
-/* CAJA DE RESEÑAS */
+/* ============================= */
+/*           REVIEWS              */
+/* ============================= */
+
 .review-box {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -141,7 +152,6 @@ body {
     color: #333;
 }
 
-/* CABECERA DE RESEÑA */
 .review-header {
     display: flex;
     justify-content: space-between;
@@ -163,7 +173,7 @@ body {
     color: #555;
 }
 
-/* FORMULARIO DE NUEVA RESEÑA */
+/* New Review Form */
 .new-review-form {
     background-color: #fff;
     border: 2px solid #007bff;
@@ -221,9 +231,14 @@ body {
     padding: 20px;
 }
 
+/* Center text helper */
 .center {
     text-align: center;
 }
+
+/* ============================= */
+/*        STAR RATING             */
+/* ============================= */
 
 .star-rating {
     display: flex;
@@ -241,4 +256,363 @@ body {
 .star-rating .star.hover,
 .star-rating .star.selected {
     color: #ffc107;
+}
+
+/* ============================= */
+/*         FILTERS SECTION        */
+/* ============================= */
+
+.filters-container {
+    padding: 15px;
+    background-color: #061e3b;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-input {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.filter-group h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.chip-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: #1c9eff transparent;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+
+/* Ocultar checkboxes */
+.chip input[type="checkbox"] {
+    display: none !important;
+}
+
+/* Estilos del chip */
+.chip {
+    display: inline-block !important;
+    padding: 8px 15px !important;
+    border-radius: 20px !important;
+    background-color: #0a264d !important;
+    color: white !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    border: 1px solid transparent !important;
+    transition: all 0.2s ease-in-out !important;
+    user-select: none !important;
+    margin: 0 !important;
+}
+
+.chip:hover {
+    background-color: #1c9eff !important;
+}
+
+/* Chip seleccionado - usando :has() para navegadores modernos */
+.chip:has(input[type="checkbox"]:checked) {
+    background-color: #1c9eff !important;
+    border-color: white !important;
+    font-weight: bold !important;
+}
+
+/* Fallback para navegadores sin :has() - JavaScript manejará esto */
+.chip.selected {
+    background-color: #1c9eff !important;
+    border-color: white !important;
+    font-weight: bold !important;
+}
+
+.order-select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.apply-filters-btn {
+    background-color: #1c9eff !important;
+    color: white !important;
+    padding: 10px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    transition: background-color 0.2s ease-in-out !important;
+}
+
+.apply-filters-btn:hover {
+    background-color: #007bff !important;
+}
+
+/* Scrollbar personalizado para webkit */
+.chip-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.chip-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chip-scroll::-webkit-scrollbar-thumb {
+    background: #1c9eff;
+    border-radius: 3px;
+}
+
+.chip-scroll::-webkit-scrollbar-thumb:hover {
+    background: #007bff;
+}
+
+/* ============================= */
+/*          FORM STYLES           */
+/* ============================= */
+
+#filtersForm {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    background-color: #061e3b;
+    padding: 15px;
+    border-radius: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+}
+
+#filtersForm input[type="text"] {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #1c9eff;
+    background-color: #0a264d;
+    color: white;
+    outline: none;
+    font-size: 14px;
+    min-width: 220px;
+    transition: all 0.2s ease-in-out;
+}
+
+#filtersForm input[type="text"]::placeholder {
+    color: #b0c4de;
+}
+
+#filtersForm input[type="text"]:focus {
+    border-color: #1c9eff;
+    box-shadow: 0 0 5px #1c9eff;
+}
+
+#filtersForm fieldset {
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+#filtersForm legend {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* Hide checkbox inside form */
+#filtersForm input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Pills inside form */
+#filtersForm label {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background-color: #0a264d;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+#filtersForm label:hover {
+    background-color: #1c9eff;
+}
+
+/* Select styling inside form */
+#filtersForm select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #1c9eff;
+    background-color: #0a264d;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+#filtersForm select:focus {
+    box-shadow: 0 0 5px #1c9eff;
+}
+
+/* Button inside form */
+#filtersForm button {
+    background-color: #1c9eff;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+#filtersForm button:hover {
+    background-color: #007bff;
+}
+
+/* ============================= */
+/*           TABLE STYLES         */
+/* ============================= */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 14px; /* gap between rows */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+thead th {
+    background-color: #061e3b;
+    color: #1c9eff;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 10px 14px;
+    text-align: left;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #1c9eff;
+}
+
+tbody tr {
+    background-color: #0a264d;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, border 0.3s ease;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+tbody td {
+    padding: 12px 14px;
+    color: white;
+    font-size: 14px;
+    border: none;
+}
+
+/* First column styling */
+tbody td:first-child {
+    font-weight: bold;
+    color: #facc15;
+    font-size: 15px;
+}
+
+/* Last column styling (rating) */
+tbody td:last-child {
+    font-weight: bold;
+    color: #ff9800;
+}
+
+/* Hover effect on rows */
+tbody tr:hover {
+    background-color: #103970;
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(28, 158, 255, 0.4);
+    border: 2px solid transparent;
+    background-image: linear-gradient(#103970, #103970),
+                      linear-gradient(90deg, #ff00ff, #1c9eff, #00ffcc);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    thead {
+        display: none;
+    }
+    tbody tr {
+        display: block;
+        margin-bottom: 14px;
+    }
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    tbody td:last-child {
+        border-bottom: none;
+    }
+}
+
+/* ============================= */
+/*       PAGINATION STYLES        */
+/* ============================= */
+
+div, /* Generic div styles for pagination container */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 25px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.pagination a {
+    background: linear-gradient(90deg, #ff00ff, #1c9eff);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(28, 158, 255, 0.5);
+}
+
+.pagination a:hover {
+    background: linear-gradient(90deg, #1c9eff, #00ffcc);
+    box-shadow: 0 0 18px rgba(0, 255, 204, 0.8);
+    transform: scale(1.05);
+}
+
+.pagination span {
+    background-color: #061e3b;
+    color: #facc15;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #1c9eff;
+    box-shadow: 0 0 10px rgba(28, 158, 255, 0.3);
 }

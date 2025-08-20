@@ -107,7 +107,7 @@ FRONTEND SECTION - SAFE TO MODIFY
 <head>
     <!-- FRONTEND: Feel free to modify title and add more stylesheets -->
     <title>Playlogue - Catálogo</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="/css/estilos.css">
 </head>
     <!-- FRONTEND: Navigation structure can be modified -->
 <body>
@@ -136,40 +136,37 @@ FRONTEND SECTION - SAFE TO MODIFY
 <!-- TERMINA EL AREA DE NAV -->
 
     <!-- TODO ESTO ES LA PARTE PARA FILTRAR LOS JUEGOS -->
-    <form method="GET" action="index.php" id="filtersForm">
-        <input type="text" name="search" placeholder="Buscar juegos..." value="<?= htmlspecialchars($search) ?>" />
-        
-        <fieldset style="display:inline-block; margin-left: 1rem;">
-            <legend>Plataformas</legend>
+<form method="GET" action="index.php" id="filtersForm" class="filters-container">
+    <input type="text" name="search" class="search-input" placeholder="Buscar juegos..." value="<?= htmlspecialchars($search) ?>" />
+    
+    <div class="filter-group">
+        <h3>Plataformas</h3>
+        <div class="chip-scroll">
             <?php foreach ($allPlatforms as $platform): ?>
-                <label>
+                <label class="chip">
                     <input type="checkbox" name="platform[]" value="<?= $platform['platformid'] ?>" 
                         <?= in_array($platform['platformid'], $filterPlatforms) ? 'checked' : '' ?>>
-                    <?= htmlspecialchars($platform['name']) ?>
+                    <span><?= htmlspecialchars($platform['name']) ?></span>
                 </label>
             <?php endforeach; ?>
-        </fieldset>
+        </div>
+    </div>
 
-        <fieldset style="display:inline-block; margin-left: 1rem;">
-            <legend>Géneros</legend>
+    <div class="filter-group">
+        <h3>Géneros</h3>
+        <div class="chip-scroll">
             <?php foreach ($allGenres as $genre): ?>
-                <label>
+                <label class="chip">
                     <input type="checkbox" name="genre[]" value="<?= $genre['genreid'] ?>" 
                         <?= in_array($genre['genreid'], $filterGenres) ? 'checked' : '' ?>>
-                    <?= htmlspecialchars($genre['name']) ?>
+                    <span><?= htmlspecialchars($genre['name']) ?></span>
                 </label>
             <?php endforeach; ?>
-        </fieldset>
-
-            Ordenar por:
-            <select name="order">
-                <option value="title" <?= $orderBy === 'title' ? 'selected' : '' ?>>Nombre</option>
-                <option value="release_date" <?= $orderBy === 'release_date' ? 'selected' : '' ?>>Año de lanzamiento</option>
-            </select>
-        </label>
-
-        <button type="submit" style="margin-left: 1rem;">Filtrar</button>
-    </form>
+        </div>
+    </div>
+    
+    <button type="submit" class="apply-filters-btn">Filtrar</button>
+</form>
     <!-- AQUI TERMINA ESTA SECCION DE FILTRADO -->
 
     <!-- ESTO ES LA TABLA O LISTADO DE LOS JUEGOS -->
@@ -218,7 +215,7 @@ FRONTEND SECTION - SAFE TO MODIFY
     <!-- AQUI TERMINA EL LISTADO DE LOS JUEGOS EN TABLA -->
 
     <!-- ESTA PARTE ES EL BOTON DE LAS PAGINAS ANTERIOR Y SIGUIENTE-->
-    <div>
+    <div class="pagination">
         <?php
         $totalPages = ceil($totalGames / $gamesPerPage);
         $queryString = $_GET;
