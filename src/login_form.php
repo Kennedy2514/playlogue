@@ -29,8 +29,8 @@ unset($_SESSION['login_error']);
 
         <!-- Formulario de login -->
         <form class="login-form" action="api/login.php" method="POST">
-            <label for="username">Email</label>
-            <input type="text" name="username" id="username" placeholder="Enter your email address..." required>
+            <label for="username">Usuario</label>
+            <input type="text" name="username" id="username" placeholder="Ingresa tu nombre de usuario..." required>
 
             <label for="password">Contraseña</label>
             <input type="password" name="password" id="password" placeholder="Contraseña" required>

@@ -59,6 +59,9 @@ try {
         <a href="index.php">Inicio</a>
         <a href="favoritos.php">Mis Favoritos</a>
         <a href="leaderboards.php">Leaderboards</a>
+        <?php if (isset($_SESSION['user']) && $_SESSION['user']['username'] === 'admin'): ?>
+            <a href="admin_panel.php">Panel de administración</a>
+        <?php endif; ?>
     </nav>
 
     <div class="nav-right">

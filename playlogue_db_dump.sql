@@ -18,14 +18,16 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
+-- Name: public; Type: SCHEMA; Schema: -; Owner: admin
 --
 
 -- *not* creating schema, since initdb creates it
 
 
+ALTER SCHEMA public OWNER TO admin;
+
 --
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: admin
 --
 
 COMMENT ON SCHEMA public IS '';
@@ -36,7 +38,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: game_genre; Type: TABLE; Schema: public; Owner: -
+-- Name: game_genre; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.game_genre (
@@ -45,8 +47,10 @@ CREATE TABLE public.game_genre (
 );
 
 
+ALTER TABLE public.game_genre OWNER TO admin;
+
 --
--- Name: game_platform; Type: TABLE; Schema: public; Owner: -
+-- Name: game_platform; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.game_platform (
@@ -55,8 +59,10 @@ CREATE TABLE public.game_platform (
 );
 
 
+ALTER TABLE public.game_platform OWNER TO admin;
+
 --
--- Name: games; Type: TABLE; Schema: public; Owner: -
+-- Name: games; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.games (
@@ -67,8 +73,10 @@ CREATE TABLE public.games (
 );
 
 
+ALTER TABLE public.games OWNER TO admin;
+
 --
--- Name: games_gameid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: games_gameid_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 CREATE SEQUENCE public.games_gameid_seq
@@ -80,15 +88,17 @@ CREATE SEQUENCE public.games_gameid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.games_gameid_seq OWNER TO admin;
+
 --
--- Name: games_gameid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: games_gameid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
 --
 
 ALTER SEQUENCE public.games_gameid_seq OWNED BY public.games.gameid;
 
 
 --
--- Name: genres; Type: TABLE; Schema: public; Owner: -
+-- Name: genres; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.genres (
@@ -97,8 +107,10 @@ CREATE TABLE public.genres (
 );
 
 
+ALTER TABLE public.genres OWNER TO admin;
+
 --
--- Name: genres_genreid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: genres_genreid_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 CREATE SEQUENCE public.genres_genreid_seq
@@ -110,15 +122,17 @@ CREATE SEQUENCE public.genres_genreid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.genres_genreid_seq OWNER TO admin;
+
 --
--- Name: genres_genreid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: genres_genreid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
 --
 
 ALTER SEQUENCE public.genres_genreid_seq OWNED BY public.genres.genreid;
 
 
 --
--- Name: platform; Type: TABLE; Schema: public; Owner: -
+-- Name: platform; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.platform (
@@ -127,8 +141,10 @@ CREATE TABLE public.platform (
 );
 
 
+ALTER TABLE public.platform OWNER TO admin;
+
 --
--- Name: platform_platformid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: platform_platformid_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 CREATE SEQUENCE public.platform_platformid_seq
@@ -140,15 +156,17 @@ CREATE SEQUENCE public.platform_platformid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.platform_platformid_seq OWNER TO admin;
+
 --
--- Name: platform_platformid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: platform_platformid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
 --
 
 ALTER SEQUENCE public.platform_platformid_seq OWNED BY public.platform.platformid;
 
 
 --
--- Name: reviews; Type: TABLE; Schema: public; Owner: -
+-- Name: reviews; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.reviews (
@@ -162,8 +180,10 @@ CREATE TABLE public.reviews (
 );
 
 
+ALTER TABLE public.reviews OWNER TO admin;
+
 --
--- Name: reviews_reviewid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: reviews_reviewid_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 CREATE SEQUENCE public.reviews_reviewid_seq
@@ -175,15 +195,17 @@ CREATE SEQUENCE public.reviews_reviewid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.reviews_reviewid_seq OWNER TO admin;
+
 --
--- Name: reviews_reviewid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: reviews_reviewid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
 --
 
 ALTER SEQUENCE public.reviews_reviewid_seq OWNED BY public.reviews.reviewid;
 
 
 --
--- Name: user_favorites; Type: TABLE; Schema: public; Owner: -
+-- Name: user_favorites; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.user_favorites (
@@ -192,8 +214,10 @@ CREATE TABLE public.user_favorites (
 );
 
 
+ALTER TABLE public.user_favorites OWNER TO admin;
+
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: users; Type: TABLE; Schema: public; Owner: admin
 --
 
 CREATE TABLE public.users (
@@ -204,8 +228,10 @@ CREATE TABLE public.users (
 );
 
 
+ALTER TABLE public.users OWNER TO admin;
+
 --
--- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 CREATE SEQUENCE public.users_userid_seq
@@ -217,50 +243,52 @@ CREATE SEQUENCE public.users_userid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.users_userid_seq OWNER TO admin;
+
 --
--- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
 --
 
 ALTER SEQUENCE public.users_userid_seq OWNED BY public.users.userid;
 
 
 --
--- Name: games gameid; Type: DEFAULT; Schema: public; Owner: -
+-- Name: games gameid; Type: DEFAULT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.games ALTER COLUMN gameid SET DEFAULT nextval('public.games_gameid_seq'::regclass);
 
 
 --
--- Name: genres genreid; Type: DEFAULT; Schema: public; Owner: -
+-- Name: genres genreid; Type: DEFAULT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.genres ALTER COLUMN genreid SET DEFAULT nextval('public.genres_genreid_seq'::regclass);
 
 
 --
--- Name: platform platformid; Type: DEFAULT; Schema: public; Owner: -
+-- Name: platform platformid; Type: DEFAULT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.platform ALTER COLUMN platformid SET DEFAULT nextval('public.platform_platformid_seq'::regclass);
 
 
 --
--- Name: reviews reviewid; Type: DEFAULT; Schema: public; Owner: -
+-- Name: reviews reviewid; Type: DEFAULT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.reviews ALTER COLUMN reviewid SET DEFAULT nextval('public.reviews_reviewid_seq'::regclass);
 
 
 --
--- Name: users userid; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users userid; Type: DEFAULT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.users_userid_seq'::regclass);
 
 
 --
--- Data for Name: game_genre; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: game_genre; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.game_genre (gameid, genreid) FROM stdin;
@@ -1445,7 +1473,7 @@ COPY public.game_genre (gameid, genreid) FROM stdin;
 
 
 --
--- Data for Name: game_platform; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: game_platform; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.game_platform (gameid, platformid) FROM stdin;
@@ -3725,7 +3753,7 @@ COPY public.game_platform (gameid, platformid) FROM stdin;
 
 
 --
--- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.games (gameid, title, release_date, cover) FROM stdin;
@@ -4207,7 +4235,7 @@ COPY public.games (gameid, title, release_date, cover) FROM stdin;
 
 
 --
--- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.genres (genreid, name) FROM stdin;
@@ -4234,7 +4262,7 @@ COPY public.genres (genreid, name) FROM stdin;
 
 
 --
--- Data for Name: platform; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: platform; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.platform (platformid, name) FROM stdin;
@@ -4267,86 +4295,68 @@ COPY public.platform (platformid, name) FROM stdin;
 
 
 --
--- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.reviews (reviewid, userid, gameid, content, rating, date_posted) FROM stdin;
-1	1	1	Direct test	5	2025-07-29 07:09:11.701995
-2	6	550	El mejor juego del mundo mi pa	5	2025-07-29 10:15:34.937615
-3	6	1	Test test test test	1	2025-07-29 10:16:57.031137
-4	6	344	sdfgsdfgsdfgasgad	5	2025-07-29 10:28:33.27219
-5	6	88	block game funny 👍	5	2025-07-29 12:37:33.688957
-6	6	20	Rafadote el Keanu Reeves	5	2025-07-29 13:46:28.929953
-7	6	226	Juego bien cristiano 💪	5	2025-07-29 14:31:58.631312
-8	6	227	amogus sus imposter	5	2025-07-29 15:28:49.147255
-9	6	264	Escalar montañas el videojuego	5	2025-07-29 16:35:24.963096
-10	6	746	Ping pong chingadazos	5	2025-07-29 16:35:46.9878
 \.
 
 
 --
--- Data for Name: user_favorites; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: user_favorites; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.user_favorites (userid, gameid) FROM stdin;
-6	227
-6	550
-6	20
-6	226
-6	746
-6	264
 \.
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY public.users (userid, username, email, password) FROM stdin;
-1	alejandro		$2y$10$1RuhvcMRgHbCCn1tt3awdez9CuFTSE.p/2keukXo2lIBtEs7jRuJ.
-4	alejandro2	a@a.com	$2y$10$1Nzf7rIzx5K9kt.VxozGHu0fXzOjVXQGA9dy9X4x1MUu0G8M8UNay
-5	alejandro3	b@b.com	$2y$10$hBA92be3CpI5qKvxO/nmMuwv09zGQcTD721wZ8lvufpnJYi2nd0cW
-6	Mamaguevo	ab@cd.com	$2y$10$J9iA6YBi4DC8XDpwbvpwdekIWNZ.OY6W0PW2rV0e1Mfwh4AkqYVze
+7	admin	admin@playlogue.com	$2y$10$mXh.oE7jKk.skLHZkYmVSeEiwz0uYb0nn8g.ad.79ELb1cGYkz/7G
+8	alejandro	aromero@gmail.com	$2y$10$6JSRHtoKWfI0/RHE.boxp.fxBtTpqIBKgAj9EcH/2QthAQ.ToeIrq
 \.
 
 
 --
--- Name: games_gameid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: games_gameid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.games_gameid_seq', 1051, true);
-
-
---
--- Name: genres_genreid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.genres_genreid_seq', 19, true);
+SELECT pg_catalog.setval('public.games_gameid_seq', 1052, true);
 
 
 --
--- Name: platform_platformid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: genres_genreid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.platform_platformid_seq', 51, true);
+SELECT pg_catalog.setval('public.genres_genreid_seq', 20, true);
 
 
 --
--- Name: reviews_reviewid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: platform_platformid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('public.platform_platformid_seq', 52, true);
+
+
+--
+-- Name: reviews_reviewid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
 SELECT pg_catalog.setval('public.reviews_reviewid_seq', 10, true);
 
 
 --
--- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.users_userid_seq', 6, true);
+SELECT pg_catalog.setval('public.users_userid_seq', 8, true);
 
 
 --
--- Name: game_genre game_genre_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: game_genre game_genre_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.game_genre
@@ -4354,7 +4364,7 @@ ALTER TABLE ONLY public.game_genre
 
 
 --
--- Name: game_platform game_platform_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: game_platform game_platform_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.game_platform
@@ -4362,7 +4372,7 @@ ALTER TABLE ONLY public.game_platform
 
 
 --
--- Name: games games_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: games games_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.games
@@ -4370,7 +4380,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: games games_unique; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: games games_unique; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.games
@@ -4378,7 +4388,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.genres
@@ -4386,7 +4396,7 @@ ALTER TABLE ONLY public.genres
 
 
 --
--- Name: platform platform_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: platform platform_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.platform
@@ -4394,7 +4404,7 @@ ALTER TABLE ONLY public.platform
 
 
 --
--- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: reviews reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.reviews
@@ -4402,7 +4412,7 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: user_favorites user_favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_favorites user_favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.user_favorites
@@ -4410,7 +4420,7 @@ ALTER TABLE ONLY public.user_favorites
 
 
 --
--- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.users
@@ -4418,7 +4428,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.users
@@ -4426,7 +4436,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.users
@@ -4434,7 +4444,71 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: game_genre game_genre_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: game_genre fk_game; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.game_genre
+    ADD CONSTRAINT fk_game FOREIGN KEY (gameid) REFERENCES public.games(gameid) ON DELETE CASCADE;
+
+
+--
+-- Name: game_platform fk_game; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.game_platform
+    ADD CONSTRAINT fk_game FOREIGN KEY (gameid) REFERENCES public.games(gameid) ON DELETE CASCADE;
+
+
+--
+-- Name: user_favorites fk_game; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.user_favorites
+    ADD CONSTRAINT fk_game FOREIGN KEY (gameid) REFERENCES public.games(gameid) ON DELETE CASCADE;
+
+
+--
+-- Name: reviews fk_game; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.reviews
+    ADD CONSTRAINT fk_game FOREIGN KEY (gameid) REFERENCES public.games(gameid) ON DELETE CASCADE;
+
+
+--
+-- Name: game_genre fk_genre; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.game_genre
+    ADD CONSTRAINT fk_genre FOREIGN KEY (genreid) REFERENCES public.genres(genreid) ON DELETE CASCADE;
+
+
+--
+-- Name: game_platform fk_platform; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.game_platform
+    ADD CONSTRAINT fk_platform FOREIGN KEY (platformid) REFERENCES public.platform(platformid) ON DELETE CASCADE;
+
+
+--
+-- Name: user_favorites fk_user; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.user_favorites
+    ADD CONSTRAINT fk_user FOREIGN KEY (userid) REFERENCES public.users(userid) ON DELETE CASCADE;
+
+
+--
+-- Name: reviews fk_user; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.reviews
+    ADD CONSTRAINT fk_user FOREIGN KEY (userid) REFERENCES public.users(userid) ON DELETE CASCADE;
+
+
+--
+-- Name: game_genre game_genre_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.game_genre
@@ -4442,7 +4516,7 @@ ALTER TABLE ONLY public.game_genre
 
 
 --
--- Name: game_genre game_genre_genreid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: game_genre game_genre_genreid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.game_genre
@@ -4450,7 +4524,7 @@ ALTER TABLE ONLY public.game_genre
 
 
 --
--- Name: game_platform game_platform_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: game_platform game_platform_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.game_platform
@@ -4458,7 +4532,7 @@ ALTER TABLE ONLY public.game_platform
 
 
 --
--- Name: game_platform game_platform_platformid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: game_platform game_platform_platformid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.game_platform
@@ -4466,7 +4540,7 @@ ALTER TABLE ONLY public.game_platform
 
 
 --
--- Name: reviews reviews_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: reviews reviews_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.reviews
@@ -4474,15 +4548,15 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: reviews reviews_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: reviews reviews_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.reviews
-    ADD CONSTRAINT reviews_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid);
+    ADD CONSTRAINT reviews_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid) ON DELETE CASCADE;
 
 
 --
--- Name: user_favorites user_favorites_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_favorites user_favorites_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.user_favorites
@@ -4490,11 +4564,18 @@ ALTER TABLE ONLY public.user_favorites
 
 
 --
--- Name: user_favorites user_favorites_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_favorites user_favorites_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY public.user_favorites
-    ADD CONSTRAINT user_favorites_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid);
+    ADD CONSTRAINT user_favorites_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid) ON DELETE CASCADE;
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: admin
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 
 
 --
