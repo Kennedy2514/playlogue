@@ -73,24 +73,48 @@ try {
             <a href="register_form.php">Regístrate</a>
         <?php endif; ?>
     </div>  
+    
 </header>
+<!-- BANNER AREA -->
+<?php
+// Traer juegos que tengan al menos una reseña
+$bannerGames = $pdo->query("
+    SELECT g.gameid, g.title, g.cover, ROUND(AVG(r.rating),1) as avg_rating, COUNT(r.reviewid) as review_count
+    FROM games g
+    INNER JOIN reviews r ON g.gameid = r.gameid
+    GROUP BY g.gameid, g.title, g.cover
+    ORDER BY avg_rating DESC
+    LIMIT 5
+
+")->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="banner-carousel">
+    <?php foreach ($bannerGames as $index => $game): ?>
+        <div class="carousel-slide <?= $index === 0 ? 'active' : '' ?>">
+            <img src="<?= htmlspecialchars($game['cover']) ?>" alt="<?= htmlspecialchars($game['title']) ?>">
+        </div>
+    <?php endforeach; ?>
+
+    <!-- Controles -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+</div>
+<!-- BANNER AREA TERMINA -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
 <h1>Top 10 Juegos Mejor Valorados</h1>
 
-<hr>
-
-<!-- PUEDES MODIFICAR: Estructura y estilos de la tabla, pero NO los datos PHP -->
-<table>
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>Año de lanzamiento</th>
-            <th>Plataformas</th>
-            <th>Géneros</th>
-            <th>Rating</th>
-        </tr>
-    </thead>
-    <tbody>
+<?php if (count($topGames) === 0): ?>
+    <p>No hay juegos disponibles para mostrar.</p>
+<?php else: ?>
+    <div class="games-portfolio">
         <?php foreach ($topGames as $game):
             $platforms = !empty($game['platforms']) ? $game['platforms'] : 'N/A';
             $genres = !empty($game['genres']) ? $game['genres'] : 'N/A';
@@ -104,18 +128,27 @@ try {
                 $ratingDisplay = $stars . ' (' . $game['avg_rating'] . '/5)';
             }
         ?>
-        <!-- PUEDES MODIFICAR: Estructura de la fila y estilos, pero NO los datos PHP ni el onclick -->
-        <tr class="game-row" 
-            onclick="openGameModal(<?= $game['gameid'] ?>, '<?= htmlspecialchars($game['title'], ENT_QUOTES) ?>', '<?= htmlspecialchars($game['cover'] ?: '', ENT_QUOTES) ?>', '<?= htmlspecialchars($platforms, ENT_QUOTES) ?>', '<?= htmlspecialchars($genres, ENT_QUOTES) ?>', '<?= $ratingDisplay ?>')">
-            <td><?= htmlspecialchars($game['title']) ?></td>
-            <td><?= date('Y', strtotime($game['release_date'])) ?></td>
-            <td><?= htmlspecialchars($platforms) ?></td>
-            <td><?= htmlspecialchars($genres) ?></td>
-            <td><?= $ratingDisplay ?></td>
-        </tr>
+        <div class="game-card" 
+             onclick="openGameModal(
+                 <?= $game['gameid'] ?>, 
+                 '<?= addslashes($game['title']) ?>', 
+                 '<?= addslashes($game['cover'] ?: 'default-cover.jpg') ?>', 
+                 '<?= addslashes($platforms) ?>', 
+                 '<?= addslashes($genres) ?>', 
+                 '<?= addslashes($ratingDisplay) ?>'
+             )">
+            <img src="<?= htmlspecialchars($game['cover'] ?: 'default-cover.jpg', ENT_QUOTES) ?>" alt="<?= htmlspecialchars($game['title'], ENT_QUOTES) ?>">
+            <div class="game-info-overlay">
+                <h3><?= htmlspecialchars($game['title']) ?></h3>
+                <p><strong>Año:</strong> <?= date('Y', strtotime($game['release_date'])) ?></p>
+                <p><strong>Plataformas:</strong> <?= htmlspecialchars($platforms) ?></p>
+                <p><strong>Géneros:</strong> <?= htmlspecialchars($genres) ?></p>
+                <p><strong>Rating:</strong> <?= $ratingDisplay ?></p>
+            </div>
+        </div>
         <?php endforeach; ?>
-    </tbody>
-</table>
+    </div>
+<?php endif; ?>
 
 <!-- PUEDES MODIFICAR: Estructura y estilos del modal, pero NO los IDs ni nombres de clases usados por JS -->
 <div id="gameModal" class="modal">
@@ -139,7 +172,6 @@ try {
             </div>
             
             <?php if (isset($_SESSION['user'])): ?>
-            <!-- PUEDES MODIFICAR: Estilos y estructura del formulario, pero NO los IDs ni names -->
             <div class="new-review-form">
                 <h3>Añadir tu reseña</h3>
                 <form id="newReviewForm">
@@ -166,7 +198,6 @@ try {
                 </form>
             </div>
             <?php else: ?>
-            <!-- PUEDES MODIFICAR: Mensaje para usuarios no logueados -->
             <div class="new-review-form">
                 <p>Para dejar una reseña, <a href="login_form.php">inicia sesión</a> o <a href="register_form.php">regístrate</a>.</p>
             </div>
@@ -174,6 +205,20 @@ try {
         </div>
     </div>
 </div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-logo">Playlogue</div>
+    <div class="footer-info">
+        <p>© 2025 Playlogue. Todos los derechos reservados.</p>
+        <p>
+            <a href="#">Términos</a> | 
+            <a href="#">Privacidad</a> | 
+            <a href="#">Contacto</a>
+        </p>
+        <div class="footer-note">Diseñado con ❤️ por tu equipo</div>
+    </div>
+</footer>
 
 <!-- PUEDES MODIFICAR: Puedes cambiar la ruta si mueves el JS, pero NO el nombre del archivo ni su funcionalidad -->
 <script src="js/script.js"></script>

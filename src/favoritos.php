@@ -63,7 +63,7 @@ try {
 <head>
     <meta charset="UTF-8" />
     <title>Mis Favoritos - Playlogue</title>
-    <link rel="stylesheet" href="/css/favoritos.css" />
+    <link rel="stylesheet" href="/css/estilos.css" />
 </head>
 <body>
 <header class="navbar">
@@ -91,59 +91,84 @@ try {
     </div>  
 </header>
 
+<main>
+<!-- BANNER AREA -->
+<?php
+// Traer juegos que tengan al menos una reseña
+$bannerGames = $pdo->query("
+    SELECT g.gameid, g.title, g.cover, ROUND(AVG(r.rating),1) as avg_rating, COUNT(r.reviewid) as review_count
+    FROM games g
+    LEFT JOIN reviews r ON g.gameid = r.gameid
+    GROUP BY g.gameid, g.title, g.cover
+    HAVING COUNT(r.reviewid) > 0
+    ORDER BY avg_rating DESC
+    LIMIT 5
+")->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="banner-carousel">
+    <?php foreach ($bannerGames as $index => $game): ?>
+        <div class="carousel-slide <?= $index === 0 ? 'active' : '' ?>">
+            <img src="<?= htmlspecialchars($game['cover']) ?>" alt="<?= htmlspecialchars($game['title']) ?>">
+        </div>
+    <?php endforeach; ?>
+
+    <!-- Controles -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+</div>
+<!-- BANNER AREA TERMINA -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 <h1>Mis Juegos Favoritos</h1>
 
 <?php if (count($games) === 0): ?>
-    <!-- PUEDES MODIFICAR: Mensaje cuando no hay favoritos -->
     <p>No has agregado juegos a tus favoritos aún.</p>
 <?php else: ?>
-    <!-- PUEDES MODIFICAR: Estructura y estilos de la tabla, pero NO los datos PHP -->
-    <table>
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Año de lanzamiento</th>
-                <th>Plataformas</th>
-                <th>Géneros</th>
-                <th>Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($games as $game): 
-            $platforms = !empty($game['platforms']) ? $game['platforms'] : 'N/A';
-            $genres = !empty($game['genres']) ? $game['genres'] : 'N/A';
+    <div class="games-portfolio" id="favorites-list">
+        <?php foreach ($games as $game): ?>
+            <?php 
+                $platforms = !empty($game['platforms']) ? $game['platforms'] : 'N/A';
+                $genres = !empty($game['genres']) ? $game['genres'] : 'N/A';
 
-            $ratingDisplay = 'Sin reseñas';
-            if ($game['avg_rating'] !== null && $game['review_count'] > 0) {
-                $stars = str_repeat('★', floor($game['avg_rating']));
-                if ($game['avg_rating'] - floor($game['avg_rating']) >= 0.5) {
-                    $stars .= '☆';
+                $ratingDisplay = 'Sin reseñas';
+                if ($game['avg_rating'] !== null && $game['review_count'] > 0) {
+                    $stars = str_repeat('★', floor($game['avg_rating']));
+                    if ($game['avg_rating'] - floor($game['avg_rating']) >= 0.5) {
+                        $stars .= '☆';
+                    }
+                    $ratingDisplay = $stars . ' (' . $game['avg_rating'] . '/5)';
                 }
-                $ratingDisplay = $stars . ' (' . $game['avg_rating'] . '/5)';
-            }
-        ?>
-            <!-- PUEDES MODIFICAR: Estructura de la fila y estilos, pero NO los datos PHP ni el onclick -->
-            <tr class="game-row" 
+            ?>
+            <div class="game-card" 
                 onclick="openGameModal(
-                    <?= $game['gameid'] ?>, 
-                    '<?= htmlspecialchars($game['title'], ENT_QUOTES) ?>', 
-                    '<?= htmlspecialchars($game['cover'] ?: '', ENT_QUOTES) ?>', 
-                    '<?= htmlspecialchars($platforms, ENT_QUOTES) ?>', 
-                    '<?= htmlspecialchars($genres, ENT_QUOTES) ?>', 
-                    '<?= $ratingDisplay ?>'
+                    <?= $game['gameid'] ?>,
+                    '<?= addslashes($game['title']) ?>',
+                    '<?= addslashes($game['cover'] ?: 'default-cover.jpg') ?>',
+                    '<?= addslashes($platforms) ?>',
+                    '<?= addslashes($genres) ?>',
+                    '<?= addslashes($ratingDisplay) ?>'
                 )">
-                <td><?= htmlspecialchars($game['title']) ?></td>
-                <td><?= date('Y', strtotime($game['release_date'])) ?></td>
-                <td><?= htmlspecialchars($platforms) ?></td>
-                <td><?= htmlspecialchars($genres) ?></td>
-                <td><?= $ratingDisplay ?></td>
-            </tr>
+                <img src="<?= htmlspecialchars($game['cover'] ?: 'default-cover.jpg', ENT_QUOTES) ?>" alt="<?= htmlspecialchars($game['title'], ENT_QUOTES) ?>">
+                <div class="game-info-overlay">
+                    <h3><?= htmlspecialchars($game['title']) ?></h3>
+                    <p><strong>Año:</strong> <?= date('Y', strtotime($game['release_date'])) ?></p>
+                    <p><strong>Plataformas:</strong> <?= htmlspecialchars($platforms) ?></p>
+                    <p><strong>Géneros:</strong> <?= htmlspecialchars($genres) ?></p>
+                    <p><strong>Rating:</strong> <?= $ratingDisplay ?></p>
+                </div>
+            </div>
         <?php endforeach; ?>
-        </tbody>
-    </table>
+    </div>
 
-    <!-- PUEDES MODIFICAR: Estilos y estructura de la paginación, pero NO la lógica PHP -->
-    <div>
+    <!-- Paginación -->
+    <div class="pagination">
         <?php 
         $totalPages = ceil($totalGames / $gamesPerPage);
         if ($currentPage > 1): ?>
@@ -157,6 +182,7 @@ try {
         <?php endif; ?>
     </div>
 <?php endif; ?>
+
 
 <!-- PUEDES MODIFICAR: Estructura y estilos del modal, pero NO los IDs ni nombres de clases usados por JS -->
 <div id="gameModal" class="modal">
@@ -211,9 +237,52 @@ try {
                 <p>Para dejar una reseña, <a href="login_form.php">inicia sesión</a> o <a href="register_form.php">regístrate</a>.</p>
             </div>
             <?php endif; ?>
+
+            <?php
+// --- Últimas reseñas del usuario ---
+$reviewsStmt = $pdo->prepare("
+    SELECT r.content, r.rating, g.title, r.created_at
+    FROM reviews r
+    INNER JOIN games g ON r.gameid = g.gameid
+    WHERE r.userid = :userid
+    ORDER BY r.created_at DESC
+    LIMIT 5
+");
+$reviewsStmt->execute([':userid' => $userId]);
+$userReviews = $reviewsStmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<?php if ($userReviews): ?>
+    <h2>Tus últimas reseñas</h2>
+    <div class="user-reviews">
+        <?php foreach ($userReviews as $rev): ?>
+            <div class="review-card">
+                <h3><?= htmlspecialchars($rev['title']) ?></h3>
+                <p><strong>Calificación:</strong> <?= $rev['rating'] ?>/5</p>
+                <p><?= htmlspecialchars($rev['content']) ?></p>
+                <small><?= date('d M Y', strtotime($rev['created_at'])) ?></small>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
         </div>
     </div>
 </div>
+</main>
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-logo">Playlogue</div>
+    <div class="footer-info">
+        <p>© 2025 Playlogue. Todos los derechos reservados.</p>
+        <p>
+            <a href="#">Términos</a> | 
+            <a href="#">Privacidad</a> | 
+            <a href="#">Contacto</a>
+        </p>
+        <div class="footer-note">Diseñado con ❤️ por tu equipo</div>
+    </div>
+</footer>
 
 <!-- PUEDES MODIFICAR: Puedes cambiar la ruta si mueves el JS, pero NO el nombre del archivo ni su funcionalidad -->
 <script src="js/script.js"></script>

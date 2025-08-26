@@ -1,3 +1,17 @@
+// =============================
+// ESCAPE HTML UTILITY
+// =============================
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+
+
+// =============================
+// OPEN / CLOSE MODAL
+// =============================
 function openGameModal(gameId, title, cover, platforms, genres, rating) {
     document.getElementById('gameTitle').textContent = title;
     document.getElementById('gamePlatforms').textContent = platforms;
@@ -5,7 +19,6 @@ function openGameModal(gameId, title, cover, platforms, genres, rating) {
     document.getElementById('gameRating').textContent = rating;
     document.getElementById('reviewGameId').value = gameId;
 
-    // Cover
     const coverImg = document.getElementById('gameCover');
     if (cover && cover.trim() !== '') {
         coverImg.src = cover;
@@ -14,13 +27,9 @@ function openGameModal(gameId, title, cover, platforms, genres, rating) {
         coverImg.style.display = 'none';
     }
 
-    // Load reviews
     loadGameReviews(gameId);
-
-    // Load favorite status
     loadFavoriteStatus(gameId);
 
-    // Show modal
     document.getElementById('gameModal').style.display = 'block';
 }
 
@@ -29,82 +38,45 @@ function closeGameModal() {
     document.getElementById('newReviewForm').reset();
 }
 
-function loadGameReviews(gameId) {
+// Close modal by clicking outside
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('gameModal');
+    if (event.target === modal) closeGameModal();
+});
+
+// =============================
+// LOAD GAME REVIEWS
+// =============================
+async function loadGameReviews(gameId) {
     const container = document.getElementById('reviewsContainer');
     container.innerHTML = '<div class="no-reviews">Cargando reseñas...</div>';
 
-    fetch(`api/get_reviews.php?gameid=${gameId}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success && data.reviews.length > 0) {
-                container.innerHTML = data.reviews.map(review => `
-                    <div class="review-box">
-                        <div class="review-header">
-                            <span class="review-username">${escapeHtml(review.username)}</span>
-                            <span class="review-rating">${'★'.repeat(review.rating)}</span>
-                        </div>
-                        <div class="review-content">${escapeHtml(review.content)}</div>
+    try {
+        const res = await fetch(`api/get_reviews.php?gameid=${gameId}`);
+        const data = await res.json();
+
+        if (data.success && data.reviews.length > 0) {
+            container.innerHTML = data.reviews.map(review => `
+                <div class="review-box">
+                    <div class="review-header">
+                        <span class="review-username">${escapeHtml(review.username)}</span>
+                        <span class="review-rating">${'★'.repeat(review.rating)}</span>
                     </div>
-                `).join('');
-            } else {
-                container.innerHTML = '<div class="no-reviews">No hay reseñas para este juego aún.</div>';
-            }
-        })
-        .catch(error => {
-            console.error('Error loading reviews:', error);
-            container.innerHTML = '<div class="no-reviews">Error al cargar las reseñas.</div>';
-        });
-}
-
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// Handle new review form submission
-document.getElementById('newReviewForm')?.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const submitBtn = this.querySelector('.submit-review-btn');
-    const originalText = submitBtn.textContent;
-
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.disabled = true;
-
-    fetch('api/review.php', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                loadGameReviews(document.getElementById('reviewGameId').value);
-                this.reset();
-                alert('Reseña enviada exitosamente!');
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al enviar la reseña');
-        })
-        .finally(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        });
-});
-
-// Close modal when clicking outside
-window.onclick = function (event) {
-    const modal = document.getElementById('gameModal');
-    if (event.target === modal) {
-        closeGameModal();
+                    <div class="review-content">${escapeHtml(review.content)}</div>
+                </div>
+            `).join('');
+        } else {
+            container.innerHTML = '<div class="no-reviews">No hay reseñas para este juego aún.</div>';
+        }
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = '<div class="no-reviews">Error al cargar reseñas.</div>';
     }
-};
+}
 
+// =============================
+// FAVORITES
+// =============================
 function loadFavoriteStatus(gameId) {
     const btn = document.getElementById('favoriteBtn');
     if (!btn) return;
@@ -121,7 +93,6 @@ function loadFavoriteStatus(gameId) {
                 btn.dataset.gameid = gameId;
                 btn.disabled = false;
 
-                // Attach event listener once
                 if (!btn.dataset.listenerAttached) {
                     btn.addEventListener('click', () => toggleFavorite(btn));
                     btn.dataset.listenerAttached = 'true';
@@ -139,7 +110,6 @@ function loadFavoriteStatus(gameId) {
 
 function toggleFavorite(btn) {
     const gameId = btn.dataset.gameid;
-
     btn.disabled = true;
     btn.textContent = 'Guardando...';
 
@@ -148,48 +118,39 @@ function toggleFavorite(btn) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `gameid=${encodeURIComponent(gameId)}`
     })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                btn.textContent = data.favorited ? 'Favorito ❤️' : 'Agregar a favoritos 🤍';
-                btn.dataset.favorited = data.favorited ? 'true' : 'false';
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(() => alert('Error al cambiar favorito'))
-        .finally(() => btn.disabled = false);
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            btn.textContent = data.favorited ? 'Favorito ❤️' : 'Agregar a favoritos 🤍';
+            btn.dataset.favorited = data.favorited ? 'true' : 'false';
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(() => alert('Error al cambiar favorito'))
+    .finally(() => btn.disabled = false);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// =============================
+// REVIEW STARS & SUBMISSION
+// =============================
+document.addEventListener('DOMContentLoaded', function() {
+    // Star rating
     const stars = document.querySelectorAll('.star-rating .star');
     const ratingInput = document.getElementById('reviewRating');
-
-    if (!stars.length || !ratingInput) return;
-
     let selectedRating = 0;
 
-    const updateStars = (rating) => {
+    function updateStars(rating) {
         stars.forEach((star, index) => {
-            if (index < rating) {
-                star.classList.add('selected');
-            } else {
-                star.classList.remove('selected');
-            }
+            star.classList.toggle('selected', index < rating);
         });
-    };
+    }
 
     stars.forEach(star => {
         const value = parseInt(star.dataset.value);
 
-        star.addEventListener('mouseenter', () => {
-            updateStars(value); // hover provisional
-        });
-
-        star.parentElement.addEventListener('mouseleave', () => {
-            updateStars(selectedRating); // vuelve al rating actual
-        });
-
+        star.addEventListener('mouseenter', () => updateStars(value));
+        star.parentElement.addEventListener('mouseleave', () => updateStars(selectedRating));
         star.addEventListener('click', () => {
             selectedRating = value;
             ratingInput.value = value;
@@ -197,41 +158,82 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Inicializar si hay un valor ya
     if (ratingInput.value) {
         selectedRating = parseInt(ratingInput.value);
         updateStars(selectedRating);
     }
-});
 
-// Agregar funcionalidad de clic para navegadores sin soporte :has()
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('fieldset label').forEach(label => {
-        label.addEventListener('click', function(e) {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            if (checkbox) {
-                // Cambiar estado del checkbox
-                checkbox.checked = !checkbox.checked;
-                
-                // Aplicar estilos manualmente para compatibilidad
-                if (checkbox.checked) {
-                    this.style.backgroundColor = '#1c9eff';
-                    this.style.borderColor = 'white';
-                    this.style.fontWeight = 'bold';
-                } else {
-                    this.style.backgroundColor = '#0a264d';
-                    this.style.borderColor = 'transparent';
-                    this.style.fontWeight = 'normal';
-                }
+    // AJAX review form submission
+    const reviewForm = document.getElementById('newReviewForm');
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const submitBtn = this.querySelector('.submit-review-btn');
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+
+            try {
+                const res = await fetch('api/review.php', { method: 'POST', body: formData });
+                const data = await res.json();
+
+                if (data.success) {
+                    this.reset();
+                    ratingInput.value = '';
+                    selectedRating = 0;
+                    updateStars(selectedRating);
+
+                    const gameId = document.getElementById('reviewGameId').value;
+                    await loadGameReviews(gameId);
+
+                    if (data.avg_rating !== undefined) {
+                        document.getElementById('gameRating').textContent = data.avg_rating;
+                    }
+                } else alert('Error: ' + data.message);
+            } catch (err) {
+                console.error(err);
+                alert('Error al enviar la reseña');
+            } finally {
+                submitBtn.textContent = 'Enviar Reseña';
+                submitBtn.disabled = false;
             }
         });
-        
-        // Aplicar estilo inicial si ya está checked
-        const checkbox = label.querySelector('input[type="checkbox"]');
-        if (checkbox && checkbox.checked) {
-            label.style.backgroundColor = '#1c9eff';
-            label.style.borderColor = 'white';
-            label.style.fontWeight = 'bold';
-        }
-    });
+
+        // Submit on Enter key
+        document.getElementById('reviewContent').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                reviewForm.requestSubmit();
+            }
+        });
+    }
 });
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+
+function showSlide(index) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+}
+
+document.querySelector('.banner-carousel .next').addEventListener('click', () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+});
+
+document.querySelector('.banner-carousel .prev').addEventListener('click', () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+});
+
+// Auto slide cada 5 segundos
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 5000);
+
+// Mostrar la primera
+showSlide(currentSlide);
+
+
+

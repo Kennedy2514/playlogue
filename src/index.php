@@ -22,6 +22,20 @@ try {
     $allPlatforms = $pdo->query("SELECT platformid, name FROM platform ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
     $allGenres = $pdo->query("SELECT genreid, name FROM genres ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
 
+    // TOP 3 JUEGOS MEJOR CALIFICADOS (Leaderboards)
+$juegos_top = $pdo->query("
+    SELECT g.gameid, g.title, g.cover, 
+           COALESCE(ROUND(AVG(r.rating),1), 0) as avg_rating, 
+           COUNT(r.reviewid) as review_count
+    FROM games g
+    LEFT JOIN reviews r ON g.gameid = r.gameid
+    GROUP BY g.gameid, g.title, g.cover
+    HAVING COUNT(r.reviewid) > 0
+    ORDER BY avg_rating DESC
+    LIMIT 3
+")->fetchAll(PDO::FETCH_ASSOC);
+
+
     $whereClauses = [];
     $params = [];
 
@@ -111,36 +125,92 @@ FRONTEND SECTION - SAFE TO MODIFY
 </head>
     <!-- FRONTEND: Navigation structure can be modified -->
 <body>
+
+
     
 <header class="navbar">
     <div class="nav-left">
         <h1>PLAYLOGUE</h1>
     </div>
 
-    <nav class="nav-center">
-        <a href="index.php">Inicio</a>
-        <a href="favoritos.php">Mis Favoritos</a>
-        <a href="leaderboards.php">Leaderboards</a>
-        <?php if (isset($_SESSION['user']) && $_SESSION['user']['username'] === 'admin'): ?>
-            <a href="admin_panel.php">Panel de administración</a>
-        <?php endif; ?>
-    </nav>
+<nav class="nav-center">
+    <a href="index.php">Inicio</a>
+    <a href="favoritos.php">Mis Favoritos</a>
+    <a href="leaderboards.php">Leaderboards</a>
+    <?php if (isset($_SESSION['user']) && $_SESSION['user']['username'] === 'admin'): ?>
+        <a href="admin_panel.php">Panel de administración</a>
+    <?php endif; ?>
+</nav>
 
-    <div class="nav-right">
-        <?php if (isset($_SESSION['user'])): ?>
-            <span>Bienvenido, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
-            <a href="api/logout.php">Cerrar sesión</a>
-        <?php else: ?>
-            <a href="login_form.php">Inicia sesión</a>
-            <a href="register_form.php">Regístrate</a>
-        <?php endif; ?>
-    </div>  
+
+<div class="nav-right">
+    <?php if (isset($_SESSION['user'])): ?>
+        <span>Bienvenido, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
+        <a href="api/logout.php">Cerrar sesión</a>
+    <?php else: ?>
+        <a href="login_form.php">Inicia sesión</a>
+        <a href="register_form.php">Regístrate</a>
+    <?php endif; ?>
+</div>
+
+
 </header>
 <!-- TERMINA EL AREA DE NAV -->
 
+<!-- BANNER AREA -->
+<?php
+// Traer juegos que tengan al menos una reseña
+$bannerGames = $pdo->query("
+    SELECT g.gameid, g.title, g.cover, ROUND(AVG(r.rating),1) as avg_rating, COUNT(r.reviewid) as review_count
+    FROM games g
+    INNER JOIN reviews r ON g.gameid = r.gameid
+    GROUP BY g.gameid, g.title, g.cover
+    ORDER BY avg_rating DESC
+    LIMIT 5
+
+")->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="banner-carousel">
+    <?php foreach ($bannerGames as $index => $game): ?>
+        <div class="carousel-slide <?= $index === 0 ? 'active' : '' ?>">
+            <img src="<?= htmlspecialchars($game['cover']) ?>" alt="<?= htmlspecialchars($game['title']) ?>">
+        </div>
+    <?php endforeach; ?>
+
+    <!-- Controles -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+</div>
+<!-- BANNER AREA TERMINA -->
+
+<section class="leaderboard">
+    <div class="leaderboard-container">
+        <h2>Top 3 Juegos Mejor Calificados</h2>
+        <div class="cards">
+            <?php if (!empty($juegos_top)): ?>
+                <?php foreach ($juegos_top as $index => $juego): ?>
+                    <div class="card">
+                        <img src="<?= htmlspecialchars($juego['cover']) ?>" 
+                            alt="<?= htmlspecialchars($juego['title']) ?>">
+                        <div class="card-content">
+                            <div class="rank">#<?= $index + 1 ?></div>
+                            <h3><?= htmlspecialchars($juego['title']) ?></h3>
+                            <span class="rating">⭐ <?= number_format($juego['avg_rating'], 1) ?></span>
+                            <p>(<?= $juego['review_count'] ?> reseñas)</p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No hay juegos con reseñas todavía.</p>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+
     <!-- TODO ESTO ES LA PARTE PARA FILTRAR LOS JUEGOS -->
 <form method="GET" action="index.php" id="filtersForm" class="filters-container">
-    <input type="text" name="search" class="search-input" placeholder="Buscar juegos..." value="<?= htmlspecialchars($search) ?>" />
     
     <div class="filter-group">
         <h3>Plataformas</h3>
@@ -169,79 +239,81 @@ FRONTEND SECTION - SAFE TO MODIFY
     </div>
     
     <button type="submit" class="apply-filters-btn">Filtrar</button>
+        <!-- 🔍 Buscador en nav-center -->
+    <div class="search-container">
+        <button type="button" class="search-toggle">
+            <!-- SVG lupa -->
+
+        </button>
+        <form method="GET" action="index.php" class="search-form">
+            <input type="text" name="search" class="search-input" 
+                placeholder="Buscar juegos..." 
+                value="<?= htmlspecialchars($search ?? '') ?>" />
+        </form>
+    </div>
 </form>
     <!-- AQUI TERMINA ESTA SECCION DE FILTRADO -->
 
-    <!-- ESTO ES LA TABLA O LISTADO DE LOS JUEGOS -->
-    <table>
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Año de lanzamiento</th>
-                <th>Plataformas</th>
-                <th>Géneros</th>
-                <th>Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($game = $stmt->fetch()): 
-                $platforms = !empty($game['platforms']) ? $game['platforms'] : 'N/A';
-                $genres = !empty($game['genres']) ? $game['genres'] : 'N/A';
+ <!-- JUEGOS ESTILO PORTAFOLIO / MASONRY -->
+  <div id="favorites-list"></div> <!-- justo arriba de la tabla -->
+<div class="games-portfolio">
+    <?php while ($game = $stmt->fetch()): 
+        $platforms = !empty($game['platforms']) ? $game['platforms'] : 'N/A';
+        $genres = !empty($game['genres']) ? $game['genres'] : 'N/A';
 
-                $ratingDisplay = 'Sin reseñas';
-                if ($game['avg_rating'] !== null && $game['review_count'] > 0) {
-                    $stars = str_repeat('★', floor($game['avg_rating']));
-                    if ($game['avg_rating'] - floor($game['avg_rating']) >= 0.5) {
-                        $stars .= '☆';
-                    }
-                    $ratingDisplay = $stars . ' (' . $game['avg_rating'] . '/5)';
-                }
-            ?>
-            <tr class="game-row" 
-                onclick="openGameModal(
-                    <?= $game['gameid'] ?>, 
-                    '<?= htmlspecialchars($game['title'], ENT_QUOTES) ?>', 
-                    '<?= htmlspecialchars($game['cover'] ?: '', ENT_QUOTES) ?>', 
-                    '<?= htmlspecialchars($platforms, ENT_QUOTES) ?>', 
-                    '<?= htmlspecialchars($genres, ENT_QUOTES) ?>', 
-                    '<?= $ratingDisplay ?>'
-                )">
-                <td><?= htmlspecialchars($game['title']) ?></td>
-                <td><?= date('Y', strtotime($game['release_date'])) ?></td>
-                <td><?= htmlspecialchars($platforms) ?></td>
-                <td><?= htmlspecialchars($genres) ?></td>
-                <td><?= $ratingDisplay ?></td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-    <!-- AQUI TERMINA EL LISTADO DE LOS JUEGOS EN TABLA -->
-
-    <!-- ESTA PARTE ES EL BOTON DE LAS PAGINAS ANTERIOR Y SIGUIENTE-->
-    <div class="pagination">
-        <?php
-        $totalPages = ceil($totalGames / $gamesPerPage);
-        $queryString = $_GET;
-        unset($queryString['page']);
-        $baseUrl = strtok($_SERVER["REQUEST_URI"], '?');
-
-        function buildPageUrl($pageNum, $queryParams, $baseUrl) {
-            $queryParams['page'] = $pageNum;
-            return $baseUrl . '?' . http_build_query($queryParams);
+        $ratingDisplay = 'Sin reseñas';
+        if ($game['avg_rating'] !== null && $game['review_count'] > 0) {
+            $stars = str_repeat('★', floor($game['avg_rating']));
+            if ($game['avg_rating'] - floor($game['avg_rating']) >= 0.5) {
+                $stars .= '☆';
+            }
+            $ratingDisplay = $stars . ' (' . $game['avg_rating'] . '/5)';
         }
-        ?>
-
-        <?php if ($currentPage > 1): ?>
-            <a href="<?= buildPageUrl($currentPage - 1, $queryString, $baseUrl) ?>">Anterior</a>
-        <?php endif; ?>
-
-        <span>Página <?= $currentPage ?> de <?= $totalPages ?></span>
-
-        <?php if ($currentPage < $totalPages): ?>
-            <a href="<?= buildPageUrl($currentPage + 1, $queryString, $baseUrl) ?>">Siguiente</a>
-        <?php endif; ?>
+    ?>
+    <div class="game-card" onclick="openGameModal(
+            <?= $game['gameid'] ?>, 
+            '<?= htmlspecialchars($game['title'], ENT_QUOTES) ?>', 
+            '<?= htmlspecialchars($game['cover'] ?: '', ENT_QUOTES) ?>', 
+            '<?= htmlspecialchars($platforms, ENT_QUOTES) ?>', 
+            '<?= htmlspecialchars($genres, ENT_QUOTES) ?>', 
+            '<?= $ratingDisplay ?>'
+        )">
+        <img src="<?= htmlspecialchars($game['cover']) ?>" alt="<?= htmlspecialchars($game['title']) ?>">
+        <div class="game-info-overlay">
+            <h3><?= htmlspecialchars($game['title']) ?></h3>
+            <p><?= date('Y', strtotime($game['release_date'])) ?></p>
+            <p><?= $ratingDisplay ?></p>
+        </div>
     </div>
-    <!-- AQUI TERMINA-->
+    <?php endwhile; ?>
+</div>
+
+ <!-- ESTA PARTE ES EL BOTON DE LAS PAGINAS ANTERIOR Y SIGUIENTE-->
+<div class="pagination">
+    <?php
+    $totalPages = ceil($totalGames / $gamesPerPage);
+    $queryString = $_GET;
+    unset($queryString['page']);
+    $baseUrl = strtok($_SERVER["REQUEST_URI"], '?');
+
+    function buildPageUrl($pageNum, $queryParams, $baseUrl) {
+        $queryParams['page'] = $pageNum;
+        return $baseUrl . '?' . http_build_query($queryParams);
+    }
+    ?>
+
+    <?php if ($currentPage > 1): ?>
+        <a href="<?= buildPageUrl($currentPage - 1, $queryString, $baseUrl) ?>#favorites-list">Anterior</a>
+    <?php endif; ?>
+
+    <span>Página <?= $currentPage ?> de <?= $totalPages ?></span>
+
+    <?php if ($currentPage < $totalPages): ?>
+        <a href="<?= buildPageUrl($currentPage + 1, $queryString, $baseUrl) ?>#favorites-list">Siguiente</a>
+    <?php endif; ?>
+</div>
+<!-- AQUI TERMINA-->
+
 
     <!-- ESTA ES LA ESTRUCTURA DE LA RESEÑA -->
 <!-- PUEDES MODIFICAR: Estructura y estilos del modal, pero NO los IDs ni nombres de clases usados por JS -->
@@ -304,6 +376,25 @@ FRONTEND SECTION - SAFE TO MODIFY
         </div>
     </div>
     <!-- AQUI TERMINA -->
+<br>
+<br>
+<br>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-logo">Playlogue</div>
+    <div class="footer-info">
+        <p>© 2025 Playlogue. Todos los derechos reservados.</p>
+        <p>
+            <a href="#">Términos</a> | 
+            <a href="#">Privacidad</a> | 
+            <a href="#">Contacto</a>
+        </p>
+        <div class="footer-note">Diseñado con ❤️ por tu equipo</div>
+    </div>
+</footer>
+
+
 
     <!-- FRONTEND: Feel free to add more JavaScript files or modify existing ones -->
     <script src="js/script.js"></script>
